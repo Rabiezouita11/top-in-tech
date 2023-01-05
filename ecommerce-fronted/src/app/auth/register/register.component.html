@@ -1,0 +1,98 @@
+
+    <form class="form-horizontal auth-form"  [formGroup]="form" (submit)="submit()"    >
+      <div class="form-group">
+        <input #inputEmail  required="" formControlName="email" name="email"  [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" type="email"
+               class="form-control" placeholder=" email">
+               <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                <div *ngIf="f['email'].errors['required']">email is required</div>
+                <div *ngIf="f['email'].errors['email']">email must be a valid email address</div>
+<!--                <div *ngIf="g['produit'].errors['email']">Email must be a valid email address</div>-->
+
+              </div>
+
+      </div>
+      <div class="form-group">
+        <input  #inputnom required="" formControlName="nom" name="nom" [ngClass]="{ 'is-invalid': submitted && f['nom'].errors }" type="text"
+               class="form-control" placeholder="nom">
+               <div *ngIf="submitted && f['nom'].errors" class="invalid-feedback">
+                <div *ngIf="f['nom'].errors['required']">nom is required</div>
+                <div *ngIf="f['nom'].errors['pattern']">nom must be a valid nom</div>
+<!--                <div *ngIf="g['produit'].errors['email']">Email must be a valid email address</div>-->
+
+              </div>
+
+      </div>
+      <div class="form-group">
+        <input  #inputPrenom required="" formControlName="prenom" name="prenom" [ngClass]="{ 'is-invalid': submitted && f['prenom'].errors }" type="text"
+               class="form-control" placeholder="prenom">
+               <div *ngIf="submitted && f['prenom'].errors" class="invalid-feedback">
+                <div *ngIf="f['prenom'].errors['required']">prenom is required</div>
+                <div *ngIf="f['prenom'].errors['pattern']">prenom must be a valid nom</div>
+<!--                <div *ngIf="g['produit'].errors['email']">Email must be a valid email address</div>-->
+
+              </div>
+      </div>
+      <div class="form-group">
+        <input  #inputPass  required="" formControlName="mot_de_passe" name="mot_de_passe" [ngClass]="{ 'is-invalid': submitted && f['mot_de_passe'].errors }" type="password"
+               class="form-control" placeholder=" Password">
+               <div *ngIf="submitted && f['mot_de_passe'].errors" class="invalid-feedback">
+                <div *ngIf="f['mot_de_passe'].errors['required']">mot_de_passe is required</div>
+                <div *ngIf="f['mot_de_passe'].errors['minLength']">mot_de_passe min minLength 6 </div>
+<!--                <div *ngIf="g['produit'].errors['email']">Email must be a valid email address</div>-->
+
+              </div>
+
+      </div>
+      <div class="form-group">
+        <input #input required="" formControlName="cin" name="cin" [ngClass]="{ 'is-invalid': submitted && f['cin'].errors }" type="text"
+               class="form-control" placeholder=" cin">
+               <div *ngIf="submitted && f['cin'].errors" class="invalid-feedback">
+                <div *ngIf="f['cin'].errors['required']">cin is required</div>
+                <div *ngIf="f['cin'].errors['pattern']">cin must be a valid pattern</div>
+<!--                <div *ngIf="g['produit'].errors['email']">Email must be a valid email address</div>-->
+
+              </div>
+
+      </div>
+      <div class="form-group">
+        <input  #fileInput required=""   formControlName="image" name="image" [ngClass]="{ 'is-invalid': submitted && f['image'].errors }" type="file"
+               class="form-control">
+
+               <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">
+                <div *ngIf="f['image'].errors['required']">image is required</div>
+                <div *ngIf="f['image'].errors['pattern']">pattern jpg png jpeg</div>
+
+<!--                <div *ngIf="g['produit'].errors['email']">Email must be a valid email address</div>-->
+
+              </div>
+
+      </div>
+      <ngx-recaptcha2 #captchaElem
+      [siteKey]="siteKey"
+      formControlName="recaptcha"      [ngClass]="{ 'is-invalid': submitted && f['recaptcha'].errors }">
+ 
+    </ngx-recaptcha2>
+    <div *ngIf="submitted && f['recaptcha'].errors" class="invalid-feedback">
+      <div *ngIf="f['recaptcha'].errors['required']">recaptcha is required</div>
+     
+
+<!--                <div *ngIf="g['produit'].errors['email']">Email must be a valid email address</div>-->
+
+    </div>
+
+      <div class="form-button">
+        <button class="btn btn-primary"  >Register</button>
+      </div>
+
+      <div class="form-footer">
+        <span>Or Sign up with social platforms</span>
+        <ul class="social">
+          <li><a class="ti-facebook" href=""></a></li>
+          <li><a class="ti-twitter" href=""></a></li>
+          <li><a class="ti-instagram" href=""></a></li>
+          <li><a class="ti-pinterest" href=""></a></li>
+        </ul>
+      </div>
+    </form>
+
+

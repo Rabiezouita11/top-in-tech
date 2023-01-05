@@ -1,0 +1,48 @@
+
+    <form class="form-horizontal auth-form"  [formGroup]="form" (submit)="submit()">
+      <div class="form-group">
+
+        <input required=""  formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" type="email"
+               class="form-control" placeholder="Username" id="exampleInputEmail1">
+               <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                <div *ngIf="f['email'].errors['required']">email is required</div>
+                <div *ngIf="f['email'].errors['email']">email must be a valid email address</div>
+<!--                <div *ngIf="g['produit'].errors['email']">Email must be a valid email address</div>-->
+
+              </div>
+      </div>
+      <div class="form-group">
+        <input required="" formControlName="mot_de_passe" type="password"
+               class="form-control" placeholder="Password"  [ngClass]="{ 'is-invalid': submitted && f['mot_de_passe'].errors }" >
+               <div *ngIf="submitted && f['mot_de_passe'].errors" class="invalid-feedback">
+                <div *ngIf="f['mot_de_passe'].errors['required']">mot de passe is required</div>
+
+<!--                <div *ngIf="g['produit'].errors['email']">Email must be a valid email address</div>-->
+
+              </div>
+      </div>
+      <div class="form-terms">
+        <div class="form-check mesm-2">
+          <input type="checkbox" class="form-check-input"
+                 id="customControlAutosizing">
+          <label class="form-check-label ps-2"
+                 for="customControlAutosizing">Remember me</label>
+          <a routerLink="/forgetPassword"
+             class="btn btn-default forgot-pass">Forgot Password!</a>
+        </div>
+      </div>
+
+      <div class="form-button">
+        <button class="btn btn-primary" type="submit" [disabled]=" submitted && f['mot_de_passe'].errors  || submitted && f['email'].errors  " >Login</button>
+      </div>
+      <div class="form-footer">
+        <span>Or Login up with social platforms</span>
+        <ul class="social">
+          <li><a class="ti-facebook" href=""></a></li>
+          <li><a class="ti-twitter" href=""></a></li>
+          <li><a class="ti-instagram" href=""></a></li>
+          <li><a class="ti-pinterest" href=""></a></li>
+        </ul>
+      </div>
+    </form>
+

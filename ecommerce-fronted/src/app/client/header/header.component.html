@@ -1,0 +1,330 @@
+<div class="loader_skeleton">
+  <div class="top-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="header-contact">
+            <ul>
+              <li>Welcome to Our top In tech</li>
+              <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us:29708865</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6 text-end">
+          <ul class="header-dropdown">
+            <li class="mobile-wishlist"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a>
+            </li>
+            <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
+              My Account
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <header>
+    <div class="container">
+
+    </div>
+  </header>
+  <div class="home-slider">
+    <div class="home"></div>
+  </div>
+  <section class="collection-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="ldr-bg">
+            <div class="contain-banner">
+              <div>
+                <h4></h4>
+                <h2></h2>
+                <h6></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="ldr-bg">
+            <div class="contain-banner">
+              <div>
+                <h4></h4>
+                <h2></h2>
+                <h6></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="container section-b-space">
+    <div class="row section-t-space">
+      <div class="col-lg-6 offset-lg-3">
+        <div class="product-para">
+          <p class="first"></p>
+          <p class="second"></p>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="no-slider row">
+          <div class="product-box">
+            <div class="img-wrapper"></div>
+            <div class="product-detail">
+              <h4></h4>
+              <h5></h5>
+              <h5 class="second"></h5>
+              <h6></h6>
+            </div>
+          </div>
+          <div class="product-box">
+            <div class="img-wrapper"></div>
+            <div class="product-detail">
+              <h4></h4>
+              <h5></h5>
+              <h5 class="second"></h5>
+              <h6></h6>
+            </div>
+          </div>
+          <div class="product-box">
+            <div class="img-wrapper"></div>
+            <div class="product-detail">
+              <h4></h4>
+              <h5></h5>
+              <h5 class="second"></h5>
+              <h6></h6>
+            </div>
+          </div>
+          <div class="product-box">
+            <div class="img-wrapper"></div>
+            <div class="product-detail">
+              <h4></h4>
+              <h5></h5>
+              <h5 class="second"></h5>
+              <h6></h6>
+            </div>
+          </div>
+          <div class="product-box">
+            <div class="img-wrapper"></div>
+            <div class="product-detail">
+              <h4></h4>
+              <h5></h5>
+              <h5 class="second"></h5>
+              <h6></h6>
+            </div>
+          </div>
+          <div class="product-box">
+            <div class="img-wrapper"></div>
+            <div class="product-detail">
+              <h4></h4>
+              <h5></h5>
+              <h5 class="second"></h5>
+              <h6></h6>
+            </div>
+          </div>
+          <div class="product-box">
+            <div class="img-wrapper"></div>
+            <div class="product-detail">
+              <h4></h4>
+              <h5></h5>
+              <h5 class="second"></h5>
+              <h6></h6>
+            </div>
+          </div>
+          <div class="product-box">
+            <div class="img-wrapper"></div>
+            <div class="product-detail">
+              <h4></h4>
+              <h5></h5>
+              <h5 class="second"></h5>
+              <h6></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- loader end -->
+
+
+<!-- header start -->
+<header>
+  <div class="mobile-fix-option"></div>
+  <div class="top-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="header-contact">
+            <ul>
+              <li>Welcome to Our TOP¨IN TECH</li>
+              <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: 29708865</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6 text-end">
+          <ul class="header-dropdown"  *ngIf="!authenticated">
+            <li class="mobile-wishlist"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a>
+            </li>
+            <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
+              My Account
+              <ul class="onhover-show-div">
+                <li><a routerLink="/login">Login</a></li>
+                <li><a routerLink="/register">register</a></li>
+
+              </ul>
+            </li>
+          </ul>
+
+          <ul class="header-dropdown" *ngIf="authenticated">
+            <li class="mobile-wishlist"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a>
+            </li>
+            <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
+              {{login}}
+              <ul class="onhover-show-div">
+
+                <li><a (click)="logout()">logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="main-menu">
+          <div class="menu-left">
+
+            <div class="brand-logo">
+              <a href="index.html"><img src="assets/LOGO.jpg" width="150px" height="150px"
+                                        class="img-fluid blur-up lazyload" alt=""></a>
+            </div>
+          </div>
+          <div class="menu-right pull-right">
+            <div>
+              <nav id="main-nav">
+                <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
+                <ul id="main-menu" class="sm pixelstrap sm-horizontal">
+                  <li>
+                    <div class="mobile-back text-end">Back<i class="fa fa-angle-right ps-2"
+                                                             aria-hidden="true"></i></div>
+                  </li>
+                  <li><a routerLink="/accueil">Home</a></li>
+
+                  <li>
+                    <a href="#">Categorie</a>
+                    <ul>
+                      <li  *ngFor="let item of ListCategorie"   ><a  [routerLink]="['/singelCategorie/',item.id ]">{{item.name}}</a></li>
+
+
+                    </ul>
+                  </li>
+
+
+                  <li><a routerLink="/about us">  about us</a></li>
+                  <li><a routerLink="/avis" *ngIf="authenticated">Avis</a></li>
+                  <li><a routerLink="/profileClient" *ngIf="authenticated">Profile</a></li>
+                  <li><a routerLink="/Historique" *ngIf="authenticated">Historique</a></li>
+                  <li><a routerLink="/quiz"  *ngIf="authenticated">Quiz</a></li>
+                  <li><a routerLink="/adresse" *ngIf="authenticated">Adresse</a></li>
+                  <li><a routerLink="/contactClient" *ngIf="authenticated">Contact us</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div>
+              <div class="icon-nav">
+                <ul>
+                  <li class="onhover-div mobile-search">
+                    <div><img src="../assets/images/icon/search.png" onclick="openSearch()"
+                              class="img-fluid blur-up lazyload" alt=""> <i class="ti-search"
+                                                                            onclick="openSearch()"></i></div>
+                    <div id="search-overlay" class="search-overlay">
+                      <div> <span class="closebtn" onclick="closeSearch()"
+                                  title="Close Overlay">×</span>
+                        <div class="overlay-content">
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-xl-12">
+                                <form>
+                                  <div class="form-group">
+                                    <input type="text" class="form-control"
+                                           id="exampleInputPassword1"
+                                           placeholder="Search a Product">
+                                  </div>
+                                  <button type="submit" class="btn btn-primary"><i
+                                    class="fa fa-search"></i></button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="onhover-div mobile-setting">
+                    <div><img src="../assets/images/icon/setting.png"
+                              class="img-fluid blur-up lazyload" alt=""> <i
+                      class="ti-settings"></i></div>
+                    <div class="show-div setting">
+                      <h6>language</h6>
+                      <ul>
+                        <li><a href="#">english</a></li>
+                        <li><a href="#">french</a></li>
+                      </ul>
+                      <h6>currency</h6>
+                      <ul class="list-inline">
+                        <li><a href="#">euro</a></li>
+                        <li><a href="#">rupees</a></li>
+                        <li><a href="#">pound</a></li>
+                        <li><a href="#">doller</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="onhover-div mobile-cart">
+                    <div><img src="../assets/client/images/icon/cart.png"
+                              class="img-fluid blur-up lazyload" alt=""> <i
+                      class="ti-shopping-cart"></i></div>
+
+
+                    <span class="cart_qty_cls"    >{{ListCountPanier}}</span>
+                    <ul class="show-div shopping-cart">
+                      <li *ngFor="let item of ListPanier">
+                        <div class="media" >
+                          <a href="#"><img alt="" class="me-3"
+                            src="/api/{{item.produit.image}}"></a>
+                          <div class="media-body">
+                            <a href="#">
+                              <h4>{{item.produit.nom}}</h4>
+                            </a>
+                            <h4><span>{{item.quantite}}x {{item.newprix}} TND</span></h4>
+                          </div>
+                        </div>
+                        <div class="close-circle"><a (click)="deletePanier(item.produit.id)"><i class="fa fa-times"
+                                                                 aria-hidden="true"></i></a></div>
+                      </li>
+
+                      <li>
+                        <div class="total" *ngIf="totalePrixPanier != 0">
+                          <h5>subtotal : <span>{{totalePrixPanier}} TND</span></h5>
+                        </div>
+                        <div class="total" style="text-align: center;" *ngIf="totalePrixPanier == 0">
+                          <h5 ><span style="color: red; "> votre panier est  Vide !!!</span></h5>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="buttons"><a routerLink="/cart" class="view-cart">view
+                          cart</a> <a routerLink="/checkout" class="checkout">checkout</a></div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

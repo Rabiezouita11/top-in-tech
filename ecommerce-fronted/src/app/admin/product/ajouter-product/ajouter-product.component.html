@@ -1,0 +1,258 @@
+<div class="container-fluid">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="page-header-left">
+          <h3>Add Products
+            <small>Multikart Admin panel</small>
+          </h3>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <ol class="breadcrumb pull-right">
+          <li class="breadcrumb-item">
+            <a href="index.html">
+              <i data-feather="home"></i>
+            </a>
+          </li>
+          <li class="breadcrumb-item">Digital</li>
+          <li class="breadcrumb-item active">Add Product</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row product-adding">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>General</h5>
+        </div>
+        <div class="card-body">
+          <div class="digital-add needs-validation">
+            <form class="dropzone digits"   [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label  class="col-form-label pt-0"><span>*</span>
+                Nom produit </label>
+
+
+              <input   #inputProduit type="text" formControlName="produit" class="form-control" pattern="[a-zA-Z ]*"  [ngClass]="{ 'is-invalid': submitted && f['produit'].errors }"  id="inputEmail4">
+              <div *ngIf="submitted && f['produit'].errors" class="invalid-feedback">
+                <div *ngIf="f['produit'].errors['required']">produit is required</div>
+                <div *ngIf="f['produit'].errors['pattern']">produit only string</div>
+<!--                <div *ngIf="g['produit'].errors['email']">Email must be a valid email address</div>-->
+
+              </div>
+            <div class="form-group">
+              <label for="validationCustomtitle"
+                     class="col-form-label pt-0"><span>*</span> Prix</label>
+              <input  #inputPrix class="form-control" formControlName="Prix" class="form-control" pattern="^[0-9]+$"  [ngClass]="{ 'is-invalid': submitted && f['Prix'].errors }"  id="validationCustomtitle" type="text"
+                     required="">
+              <div *ngIf="submitted && f['Prix'].errors" class="invalid-feedback">
+                <div *ngIf="f['Prix'].errors['required']">Prix is required</div>
+                <div *ngIf="f['Prix'].errors['pattern']">Prix only number</div>
+                <!--                <div *ngIf="g['produit'].errors['email']">Email must be a valid email address</div>-->
+
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-form-label categories-basic"><span>*</span>
+                Categories</label>
+              <select  class="custom-select form-control" #inputcategorie formControlName="Categories" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f['Categories'].errors }" >
+
+                <option  *ngFor="let item of listCategories"  [value]="item.id">{{item.name}}</option>
+
+
+
+              </select>
+              <div *ngIf="submitted && f['Categories'].errors" class="invalid-feedback">
+                <div *ngIf="f['Categories'].errors['required']">Categories is required</div>
+                <!--                <div *ngIf="g['produit'].errors['email']">Email must be a valid email address</div>-->
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Description</label>
+              <textarea rows="5" #inputDescription cols="12"  formControlName="Description" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f['Description'].errors }"   ></textarea>
+              <div *ngIf="submitted && f['Description'].errors" class="invalid-feedback">
+                <div *ngIf="f['Description'].errors['required']">Description is required</div>
+                <!--                <div *ngIf="g['produit'].errors['email']">Email must be a valid email address</div>-->
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="validationCustom02" class="col-form-label"><span>*</span>
+                Product Quantité</label>
+              <input class="form-control" #inputQuantite id="validationCustom02" formControlName="Quantite" class="form-control" pattern="^[0-9]+$" [ngClass]="{ 'is-invalid': submitted && f['Quantite'].errors }"  type="text">
+              <div *ngIf="submitted && f['Quantite'].errors" class="invalid-feedback">
+                <div *ngIf="f['Quantite'].errors['required']">Quantité is required</div>
+                <div *ngIf="f['Quantite'].errors['pattern']">Prix only number</div>
+                <!--                <div *ngIf="g['produit'].errors['email']">Email must be a valid email address</div>-->
+
+              </div>
+            </div>
+
+            <label class="col-form-label pt-0"> Product Upload</label>
+
+            <div class="form-group">
+
+              <input
+              multiple="multiple"
+              (change)="selecteFile($event)"
+              #inputImage
+                formControlName="Upload"
+                type="file"
+                class="form-control"
+                multiple=""
+                [ngClass]="{ 'is-invalid': submitted && f['Upload'].errors }" >
+              <div *ngIf="submitted && f['Upload'].errors" class="invalid-feedback">
+
+                <div *ngIf="f['Upload'].errors && f['Upload'].errors['required']">Upload is required.</div>
+
+
+              </div>
+<!--              <div *ngIf="g['file'].invalid" class="alert alert-danger">-->
+<!--                <div *ngIf=" g['file'].errors['required']">File is required.</div>-->
+<!--              </div>-->
+            </div>
+
+
+
+
+              <div class="form-group mb-0">
+                <div class="product-buttons">
+                  <button type="submit"   class="btn btn-primary">Add</button>
+                  <button type="button"  class="btn btn-light">Discard</button>
+                </div>
+              </div>
+            </div>
+            </form>
+
+
+
+<!--            <form [formGroup]="form" (ngSubmit)="onSubmit()">-->
+<!--              <div class="form-group">-->
+<!--                <label>Full Name</label>-->
+<!--                <input-->
+<!--                  type="text"-->
+<!--                  formControlName="fullname"-->
+<!--                  class="form-control"-->
+<!--                  [ngClass]="{ 'is-invalid': submitted && f['fullname'].errors }"-->
+<!--                />-->
+<!--                <div *ngIf="submitted && f['fullname'].errors" class="invalid-feedback">-->
+<!--                  <div *ngIf="f['fullname'].errors['required']">Fullname is required</div>-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--              <div class="form-group">-->
+<!--                <label>Username</label>-->
+<!--                <input-->
+<!--                  type="text"-->
+<!--                  formControlName="username"-->
+<!--                  class="form-control"-->
+<!--                  [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"-->
+<!--                />-->
+<!--                <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">-->
+<!--                  <div *ngIf="f['username'].errors['required']">Username is required</div>-->
+<!--                  <div *ngIf="f['username'].errors['minlength']">-->
+<!--                    Username must be at least 6 characters-->
+<!--                  </div>-->
+<!--                  <div *ngIf="f['username'].errors['maxlength']">-->
+<!--                    Username must not exceed 20 characters-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--              <div class="form-group">-->
+<!--                <label>Email</label>-->
+<!--                <input-->
+<!--                  type="text"-->
+<!--                  formControlName="email"-->
+<!--                  class="form-control"-->
+<!--                  [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"-->
+<!--                />-->
+<!--                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">-->
+<!--                  <div *ngIf="f['email'].errors['required']">Email is required</div>-->
+<!--                  <div *ngIf="f['email'].errors['email']">Email is invalid</div>-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--              <div class="form-group">-->
+<!--                <label>Password</label>-->
+<!--                <input-->
+<!--                  type="password"-->
+<!--                  formControlName="password"-->
+<!--                  class="form-control"-->
+<!--                  [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"-->
+<!--                />-->
+<!--                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">-->
+<!--                  <div *ngIf="f['password'].errors['required']">Password is required</div>-->
+<!--                  <div *ngIf="f['password'].errors['minlength']">-->
+<!--                    Password must be at least 6 characters-->
+<!--                  </div>-->
+<!--                  <div *ngIf="f['password'].errors['maxlength']">-->
+<!--                    Username must not exceed 40 characters-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--              <div class="form-group">-->
+<!--                <label>Confirm Password</label>-->
+<!--                <input-->
+<!--                  type="password"-->
+<!--                  formControlName="confirmPassword"-->
+<!--                  class="form-control"-->
+<!--                  [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"-->
+<!--                />-->
+<!--                <div-->
+<!--                  *ngIf="submitted && f['confirmPassword'].errors"-->
+<!--                  class="invalid-feedback"-->
+<!--                >-->
+<!--                  <div *ngIf="f['confirmPassword'].errors['required']">-->
+<!--                    Confirm Password is required-->
+<!--                  </div>-->
+<!--                  <div *ngIf="f['confirmPassword'].errors['matching']">-->
+<!--                    Confirm Password does not match-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--              <div class="form-group form-check">-->
+<!--                <input-->
+<!--                  type="checkbox"-->
+<!--                  formControlName="acceptTerms"-->
+<!--                  class="form-check-input"-->
+<!--                  [ngClass]="{ 'is-invalid': submitted && f['acceptTerms'].errors }"-->
+<!--                />-->
+<!--                <label for="acceptTerms" class="form-check-label"-->
+<!--                >I have read and agree to the Terms</label-->
+<!--                >-->
+<!--                <div *ngIf="submitted && f['acceptTerms'].errors" class="invalid-feedback">-->
+<!--                  Accept Terms is required-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--              <div class="form-group">-->
+<!--                <button type="submit" class="btn btn-primary">Register</button>-->
+<!--                <button-->
+<!--                  type="button"-->
+<!--                  (click)="onReset()"-->
+<!--                  class="btn btn-warning float-right"-->
+<!--                >-->
+<!--                  Reset-->
+<!--                </button>-->
+<!--              </div>-->
+<!--            </form>-->
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

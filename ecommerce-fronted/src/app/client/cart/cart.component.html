@@ -1,0 +1,181 @@
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="page-title">
+          <h2>cart</h2>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <nav aria-label="breadcrumb" class="theme-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active">cart</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- breadcrumb End -->
+
+<!--section start-->
+<section class="cart-section section-b-space">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="cart_counter">
+          <div class="countdownholder">
+            Your cart will be expired in<span id="timer"> 24 </span> H
+          </div>
+          <a href="checkout.html" class="cart_checkout btn btn-solid btn-xs"
+            >check out</a
+          >
+        </div>
+      </div>
+      <div class="col-sm-12 table-responsive-xs">
+        <table class="table cart-table">
+          <thead>
+            <tr class="table-head">
+              <th scope="col">image</th>
+              <th scope="col">product name</th>
+              <th scope="col">price</th>
+              <th scope="col">quantity</th>
+              <th scope="col">supprimer</th>
+              <th scope="col">total</th>
+              <th scope="col">action</th>
+            </tr>
+          </thead>
+
+          <tbody *ngFor="let item of listProduit">
+            <tr>
+              <td>
+                <a href="#"
+                  ><img src="/api/{{ item.produit.image }}" alt=""
+                /></a>
+              </td>
+              <td>
+                <a href="#">{{ item.produit.nom }}</a>
+                <!-- <div class="mobile-cart-content row">
+                <div class="col">
+                  <div class="qty-box">
+                    <div class="input-group">
+                      <input #inputnumber  [ngModel]="quantite" type="number" min="1"   class="form-control input-number"
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <h2 class="td-color">{{item.prix}}</h2>
+                </div>
+                <div class="col">
+                  <h2 class="td-color"><a  (click)="deletePanier(item.produit.id)" class="icon"><i class="ti-close"></i></a>
+                  </h2>
+                </div>
+              </div> -->
+              </td>
+              <td>
+                <h2>{{ item.newprix }}</h2>
+              </td>
+              <td>
+                <div class="qty-box">
+                  <div class="input-group">
+                    <input
+                      [value]="item.quantite"
+                      type="number"
+                      min="1"
+                      class="form-control input-number"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <a (click)="deletePanier(item.produit.id)" class="icon"
+                  ><i class="ti-close"></i
+                ></a>
+              </td>
+              <td>
+                <h2 class="td-color">{{ item.prix }}TND</h2>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="hassen(item.produit.id, item.produit.nom)"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <i class="ti-shopping-cart"></i>
+                </button>
+                <!-- <a  class="icon"><i class="ti-shopping-cart"></i></a></td> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-responsive-md">
+          <table *ngIf="listProduit != 0" class="table cart-table">
+            <tfoot>
+              <tr>
+                <td>total prix :</td>
+                <td>
+                  <h2>{{ totalePrixPanier }} TND</h2>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="listProduit == 0" style="text-align: center">
+      <a class="btn btn-solid">Panier vide</a>
+    </div>
+    <br />
+    <br />
+    <div class="row cart-buttons">
+      <div class="col-6">
+        <a href="#" class="btn btn-solid">continue shopping</a>
+      </div>
+      <div class="col-6" *ngIf="listProduit != 0">
+        <a href="#" class="btn btn-solid">check out</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!--section end-->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ nomproduit }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <input
+          #inputnumber
+          type="number"
+          min="1"
+          class="form-control input-number"
+        />
+        <div style="text-align: center">
+          <button (click)="update()" data-bs-dismiss="modal" class="icon">
+            <i class="ti-shopping-cart"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

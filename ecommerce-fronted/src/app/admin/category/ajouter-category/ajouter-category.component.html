@@ -1,0 +1,95 @@
+<div class="container-fluid">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="page-header-left">
+          <h3>{{action}} Category
+            <small>Multikart Admin panel</small>
+          </h3>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <ol class="breadcrumb pull-right">
+          <li class="breadcrumb-item">
+            <a href="index.html">
+              <i data-feather="home"></i>
+            </a>
+          </li>
+            <li class="breadcrumb-item">Category</li>
+          <li class="breadcrumb-item active">{{action}} Category</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <form class="needs-validation"  [formGroup]="form" (ngSubmit)="onSubmit()"  >
+            <div class="form-group row">
+              <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>category
+                Name</label>
+              <div class="col-md-8">
+
+                <input  #inputdeletedimage type="hidden"   formControlName="inputdelete"    class="form-control"   >
+                <input
+               style="font-size: 20px ;"
+
+                #inputnom
+                type="text"
+                formControlName="name"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
+                pattern="[a-zA-Z ]*"
+
+                />
+              <div      *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                <div *ngIf="f['name'].errors['required']">nom categorie is required</div>
+                <div *ngIf="f['name'].errors['pattern']">nom categorie only string </div>
+              </div>
+
+              </div>
+            </div>
+
+            <div class="form-group row">
+
+              <div style="text-align:center ;" class="sidebar-user">
+
+                <img *ngIf="action == 'modifier'" [src]="urlimage" alt="" width="200px" height="200px"   />
+
+
+
+
+                </div>
+
+              </div>
+
+
+
+
+            <div class="form-group row"    >
+              <label class="col-xl-3 col-md-4">Image</label>
+              <div class="col-md-8">
+
+                <input #inputimage      style="font-size: 20px ;"   type="file"  formControlName="Image" [ngClass]="{ 'is-invalid': submitted && f['Image'].errors }" name="" class="form-control" id="">
+
+
+                <div *ngIf="submitted && f['Image'].errors" class="invalid-feedback">
+                  <div *ngIf="f['Image'].errors['required']">Image is required</div>
+
+
+                </div>
+              </div>
+            </div>
+           <button type="submit"  class="btn btn-primary d-block">{{action}}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

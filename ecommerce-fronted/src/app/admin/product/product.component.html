@@ -1,0 +1,87 @@
+<div class="container-fluid">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="page-header-left">
+          <h3>Product List
+            <small>Multikart Admin panel</small>
+          </h3>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <ol class="breadcrumb pull-right">
+          <li class="breadcrumb-item">
+            <a href="index.html">
+              <i data-feather="home"></i>
+            </a>
+          </li>
+          <li class="breadcrumb-item">Digital</li>
+          <li class="breadcrumb-item active">Product List</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <form class="form-inline search-form search-box">
+            <div class="form-group">
+              <input class="form-control-plaintext" type="search" placeholder="Search..">
+            </div>
+          </form>
+
+          <a routerLink="/ajouterProduit" class="btn btn-primary mt-md-0 mt-2">Add New
+            Product</a>
+        </div>
+        <div class="row products-admin ratio_asos">
+          <div class="col-xl-3 col-sm-6" *ngFor="let item of listproduit">
+            <div class="card">
+              <div class="card-body product-box">
+                <div class="img-wrapper">
+                  <div class="front">
+                    <a href="javascript:void(0)"><img src="/api/{{item.image}} " [width]="500" [height]="500"
+                                                      class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                    <div class="product-hover">
+                      <ul>
+                        <li>
+                          <button  routerLink="/UpdateProduct" class="btn" type="button" data-original-title=""
+                                  title=""><i class="ti-pencil-alt"></i></button>
+                        </li>
+                        <li>
+                          <button (click)="delete(item.id)" class="btn"><i class="ti-trash"></i></button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-detail">
+                  <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                    class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                    class="fa fa-star"></i></div>
+                  <a href="javascript:void(0)">
+                    <h6>{{item.nom}}</h6>
+                  </a>
+                  <h4>{{item.prix}} TND</h4>
+                  <h3>{{item.categorie.name}}</h3>
+                  <ul class="color-variant">
+                    <li class="bg-light0"></li>
+                    <li class="bg-light1"></li>
+                    <li class="bg-light2"></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+    </div>
+    </div>
+  </div>
+</div>

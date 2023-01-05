@@ -1,0 +1,94 @@
+<div class="container-fluid">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="page-header-left">
+          <h3>Client List
+            <small>Multikart Admin panel</small>
+          </h3>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <ol class="breadcrumb pull-right">
+          <li class="breadcrumb-item">
+            <a href="index.html">
+              <i data-feather="home"></i>
+            </a>
+          </li>
+          <li class="breadcrumb-item">Client</li>
+          <li class="breadcrumb-item active">Client List</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <form class="form-inline search-form search-box">
+            <div class="form-group">
+              <input class="form-control-plaintext" type="search" placeholder="Search..">
+            </div>
+          </form>
+
+        </div>
+        <div class="card-body">
+          <div class="table-responsive table-desi">
+            <table class="table all-package" id="editableTable">
+              <thead>
+              <tr>
+                <th>id</th>
+                <th>nom</th>
+                <th>prenom</th>
+                <th>cin</th>
+                <th>image</th>
+                <th>Option</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr  *ngFor="let item of listClient"  >
+
+                <td data-field="number">{{item.id}}</td>
+
+                <td data-field="date">{{item.nom}}</td>
+
+                <td data-field="text">{{item.prenom}}</td>
+
+                <td class="order-success">
+                  <span>{{item.cin}}</span>
+                </td>
+                <td>
+
+                  <img src="/api/{{item.image}}" alt="users">
+                </td>
+
+
+
+                <td>
+
+
+
+                 <button  *ngIf="item.banier == 'true'"    (click)="inactive(item.id)" type="submit" #inputId [value]="item.id"   class="form-control"    style="background-color: green;" >active</button>
+                 <button  *ngIf="item.banier == 'false'"    (click)="inactive(item.id)" type="submit" #inputId [value]="item.id"   class="form-control"    style="background-color: red;" >inactive</button>
+
+                </td>
+&nbsp;
+
+
+              </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

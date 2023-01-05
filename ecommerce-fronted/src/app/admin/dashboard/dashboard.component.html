@@ -1,0 +1,126 @@
+
+
+              <!-- Container-fluid starts-->
+              <div class="container-fluid">
+                  <div class="page-header">
+                      <div class="row">
+                          <div class="col-lg-6">
+                              <div class="page-header-left">
+                                  <h3>Dashboard
+                                      <small> Admin</small>
+                                  </h3>
+                              </div>
+                          </div>
+                          <div class="col-lg-6">
+                              <ol class="breadcrumb pull-right">
+                                  <li class="breadcrumb-item">
+                                      <a href="index.html">
+                                          <i data-feather="home"></i>
+                                      </a>
+                                  </li>
+                                  <li class="breadcrumb-item active">Dashboard</li>
+                              </ol>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- Container-fluid Ends-->
+
+              <!-- Container-fluid starts-->
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-xxl-3 col-md-6 xl-50">
+                          <div class="card o-hidden widget-cards">
+                              <div class="warning-box card-body">
+                                  <div class="media static-top-widget align-items-center">
+                                      <div class="icons-widgets">
+                                          <div class="align-self-center text-center">
+                                              <i data-feather="navigation" class="font-warning"></i>
+                                          </div>
+                                      </div>
+                                      <div class="media-body media-doller">
+                                          <span class="m-0">Produit</span>
+                                          <h3 class="mb-0">{{produit}}<small> </small>
+                                          </h3>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-xxl-3 col-md-6 xl-50">
+                          <div class="card o-hidden widget-cards">
+                              <div class="secondary-box card-body">
+                                  <div class="media static-top-widget align-items-center">
+                                      <div class="icons-widgets">
+                                          <div class="align-self-center text-center">
+                                              <i data-feather="box" class="font-secondary"></i>
+                                          </div>
+                                      </div>
+                                      <div class="media-body media-doller">
+                                          <span class="m-0">Commande</span>
+                                          <h3 class="mb-0">{{commande}}<small> </small>
+                                          </h3>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-xxl-3 col-md-6 xl-50">
+                          <div class="card o-hidden widget-cards">
+                              <div class="primary-box card-body">
+                                  <div class="media static-top-widget align-items-center">
+                                      <div class="icons-widgets">
+                                          <div class="align-self-center text-center"><i data-feather="message-square"
+                                                  class="font-primary"></i></div>
+                                      </div>
+                                      <div class="media-body media-doller"><span class="m-0">Contact</span>
+                                          <h3 class="mb-0">{{contact}}<small> </small></h3>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-xxl-3 col-md-6 xl-50">
+                          <div class="card o-hidden widget-cards">
+                              <div class="danger-box card-body">
+                                  <div class="media static-top-widget align-items-center">
+                                      <div class="icons-widgets">
+                                          <div class="align-self-center text-center"><i data-feather="users"
+                                                  class="font-danger"></i></div>
+                                      </div>
+                                      <div class="media-body media-doller"><span class="m-0">Quizz</span>
+                                          <h3 class="mb-0">{{quiz}}<small> </small></h3>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div style="text-align: center;" >
+                        <img src="assets/1.jpg" width="800px" height="500px" alt="">
+                        <div    id="chart"   >
+                          <canvas baseChart
+               [datasets]="datasets"
+               [labels]="labels"
+               [options]="barChartOptions"
+               [legend]="barChartLegend"
+               [type]="barChartType">
+       </canvas>
+     </div>
+                      </div>
+
+
+                  <div class="full"  id="map">
+
+                  </div>
+
+
+
+
+
+
+
+
+                  </div>
+              </div>
+              <!-- Container-fluid Ends-->
+

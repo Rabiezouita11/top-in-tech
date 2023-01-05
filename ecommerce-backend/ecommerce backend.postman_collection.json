@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "06e33fa6-b24a-44eb-a130-6f0c5432f815",
+		"name": "ecommerce backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "categorie",
+			"item": [
+				{
+					"name": "afficher categorie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categories/affichercategorie",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"affichercategorie"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ajouter categorie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"tablette\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/categories/ajoutercategorie",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"ajoutercategorie"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modifier categorie",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "supprimer categorie",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "find categorie by name",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "afficher user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/afficheruser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"afficheruser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ajouter user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"nom\" : \"rabie\",\r\n\"prenom\": \"zouita\",\r\n\"mot_de_passe\" : \"123456\",\r\n\"cin\": 13633840,\r\n\"role\": \"client\",\r\n\"image\": \"aaaaa.jpg\",\r\n\"email\": \"rabiezouita82@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/ajouteruser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"ajouteruser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modifier user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"nom\" : \"rabie\",\r\n\"prenom\": \"zouita\",\r\n\"mot_de_passe\" : \"123456\",\r\n\"cin\": 13633840,\r\n\"role\": \"client\",\r\n\"image\": \"aaaaa.jpg\",\r\n\"email\": \"rabiezouita82@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/modifieruser/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"modifieruser",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "supprimer user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/supprimeruser/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"supprimeruser",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

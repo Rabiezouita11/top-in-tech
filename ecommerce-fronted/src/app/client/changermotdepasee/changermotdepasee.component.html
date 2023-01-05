@@ -1,0 +1,59 @@
+<section class="contact-page register-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>PERSONAL DETAIL</h3>
+        <form class="theme-form"  [formGroup]="bb" (submit)="submit()"   >
+          <div class="form-row row">
+
+
+            <div class="form-group">
+              <label for="password">ancien mot de passe</label>
+              <input  #inputpassword type="password" class="form-control" formControlName="password" name="password"  [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"  style="font-size: 15px;"   required="">
+              <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                <div    *ngIf="f['password'].errors['required']">password is required</div>
+              </div>
+<!--                <div *ngIf="g['produit'].errors['email']">Email must be a valid email address</div>-->
+
+            </div>
+            <div class="form-group">
+              <label for="password">nouveau mot de passe</label>
+              <input   #inputneuveaupassword    type="password" class="form-control" formControlName="newpassword" name="newpassword"  [ngClass]="{ 'is-invalid': submitted && f['newpassword'].errors }"   style="font-size: 15px;"    required="">
+              <div *ngIf="submitted && f['newpassword'].errors" class="invalid-feedback">
+                <div *ngIf="f['newpassword'].errors['required']">nouveau mot de passe is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">confirmer mot de passe</label>
+              <input   #inputconfirmerpassword   type="password" class="form-control"  formControlName="confirmpassword" name="confirmpassword"  [ngClass]="{ 'is-invalid': submitted && f['confirmpassword'].errors }"  style="font-size: 15px;"    required="">
+              <div *ngIf="submitted && f['confirmpassword'].errors" class="invalid-feedback">
+                <div *ngIf="f['confirmpassword'].errors['required']">confirmer mot de passe is required</div>
+            </div>
+          </div>
+                      <input   [value]="id" #xx
+                         type="hidden" class="form-control"   style="font-size: 15px;"   required="">
+
+            <div class="col-md-12 "  style="text-align:center;">
+            </div>
+          </div>
+          <br>
+          <br>
+<div style="text-align: center;" >
+
+
+          <button  class="btn btn-sm btn-solid"  type="submit">enregistrer</button>
+        </div>
+        </form>
+        <div   style="text-align:center ;" >
+
+
+
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

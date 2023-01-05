@@ -1,0 +1,30 @@
+<h1 style="text-align: center;" >{{titrequiz}}</h1>
+<section class="section-1" id="section-1"  >
+    <div class="form-control" style="font-size: 30px ;
+      text-align: center;">
+<input #inputquiz1   [value]="quiz1"  type="radio" class="input-radio" [name]="idquiz" >
+
+{{quiz1}}
+<br>
+<input #inputquiz2  [value]="quiz2"  type="radio" class="input-radio" [name]="idquiz">
+
+{{quiz2}}
+<br>
+<input  #inputquiz3  [value]="quiz3" type="radio" class="input-radio" [name]="idquiz">
+
+{{quiz3}}
+
+<button id="btn" type="button" (click)="quiz(idquiz, message, inputquiz1.checked, inputquiz2.checked, inputquiz3.checked)" class="btn btn-primary" [disabled]="reponse" > Valider</button>
+
+    </div>
+</section>
+<div *ngIf="reponse">
+  <h1  *ngIf="bonnereponse == 'bonne reponse'"  style="text-align: center; color: green;" >votre reponse est correct  </h1><br>
+  <h1  *ngIf="bonnereponse == 'Mauvaise réponse'"  style="text-align: center; color: red;" >votre reponse est incorrect  </h1><br>
+  <h1 style="text-align: center;" >  {{reponse}} </h1>
+  <br>
+
+  <h1  *ngIf="bonnereponse == 'Mauvaise réponse'"  style="text-align: center"   > la reponse correct est      </h1>
+  <br>
+  <h1 *ngIf="bonnereponse == 'Mauvaise réponse'"  style="text-align: center; color: green;"  >  {{correctreponse}} </h1>
+</div>

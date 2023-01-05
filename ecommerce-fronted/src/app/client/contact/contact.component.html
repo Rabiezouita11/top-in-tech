@@ -1,0 +1,110 @@
+<div class="breadcrumb-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="page-title">
+          <h2>contact</h2>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <nav aria-label="breadcrumb" class="theme-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/accueil">Home</a></li>
+            <li class="breadcrumb-item active">contact</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="contact-page section-b-space">
+  <div class="container">
+    <div class="row section-b-space">
+      <div class="col-lg-7 map">
+        <iframe src="https://maps.google.com/maps?q=Le%20kef&t=&z=9&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+          allowfullscreen></iframe>
+      </div>
+      <div class="col-lg-5">
+        <div class="contact-right">
+          <ul>
+            <li>
+              <div class="contact-icon"><img src="../assets/images/icon/phone.png"
+                                             alt="Generic placeholder image">
+                <h6>Contact Us</h6>
+              </div>
+              <div class="media-body">
+                <p>+91 123 - 456 - 7890</p>
+                <p>+86 163 - 451 - 7894</p>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                <h6>Address</h6>
+              </div>
+              <div class="media-body">
+                <p>ABC Complex,Near xyz, New York</p>
+                <p>USA 123456</p>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon"><img src="../assets/images/icon/email.png"
+                                             alt="Generic placeholder image">
+                <h6>Address</h6>
+              </div>
+              <div class="media-body">
+                <p>Support@Shopcart.com</p>
+                <p>info@shopcart.com</p>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon"><i class="fa fa-fax" aria-hidden="true"></i>
+                <h6>Fax</h6>
+              </div>
+              <div class="media-body">
+                <p>Support@Shopcart.com</p>
+                <p>info@shopcart.com</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <form class="theme-form" [formGroup]="form" (ngSubmit)="onSubmit()"   >
+          <div class="form-row row">
+            <div class="col-md-6">
+              <label for="name">Nom</label>
+              <input #inputnom type="text" class="form-control" [value]="nom" id="name" placeholder="Enter Your name"
+              readonly>
+            </div>
+
+
+            <div class="col-md-6">
+              <label for="email">Email</label>
+              <input #inputemail type="text" class="form-control" [value]="email" id="email" placeholder="Email" readonly>
+            </div>
+            <div class="col-md-12">
+              <label for="review">Write Your Message</label>
+              <textarea style="font-size: 20px;"  #inputmessage
+              type="text"
+              formControlName="message"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['message'].errors }" class="form-control" placeholder="Write Your Message"
+                        id="exampleFormControlTextarea1" rows="6" required></textarea>
+                        <div  style="text-align: center;"    *ngIf="submitted && f['message'].errors" class="invalid-feedback">
+                          <div *ngIf="f['message'].errors['required']" style="font-size: 20px;"   >message is required</div>
+
+                        </div>
+            </div>
+
+            <div class="col-md-12">
+              <button class="btn btn-solid" type="submit">Send Your Message</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Section ends-->

@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="page-header-left">
+          <h3>Categoryy
+            <small>Multikart Admin panel</small>
+          </h3>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <ol class="breadcrumb pull-right">
+          <li class="breadcrumb-item">
+            <a href="index.html">
+              <i data-feather="home"></i>
+            </a>
+          </li>
+          <li class="breadcrumb-item">Physical</li>
+          <li class="breadcrumb-item active">Category</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <form class="form-inline search-form search-box">
+            <div class="form-group">
+              <input class="form-control-plaintext" type="search" placeholder="Search..">
+            </div>
+          </form>
+
+          <button type="button" routerLink="ajouterCategory" class="btn btn-primary add-row mt-md-0 mt-2">Add
+            Category</button>
+        </div>
+
+        <div class="card-body">
+          <div class="table-responsive table-desi">
+            <table class="table all-package table-category " id="editableTable">
+
+              <thead>
+              <tr>
+                <th>id</th>
+                <th>nom</th>
+                <th>image</th>
+
+                <th>action</th>
+              </tr>
+              </thead>
+
+              <tbody>
+
+              <tr *ngFor="let items of list  , let i=index"  >
+
+                <td data-field="id">{{items.id}}</td>
+                <td data-field="name">{{items.name}}</td>
+                <td>
+                  <img src="/api/{{items.Image}}"
+                       data-field="image" alt="">
+                </td>
+
+
+
+
+                <td>
+
+                  <a   [routerLink]="['/category/update/',items.id]"   >
+                    <i class="fa fa-edit" title="Edit"></i>
+                  </a>
+
+                  <a (click)="delete(items)">
+                    <i class="fa fa-trash" title="Delete"></i>
+                  </a>
+                </td>
+              </tr>
+
+
+              </tbody>
+            </table>
+
+            <div  *ngIf="list.length==0" class="text-center" >
+              <h3  style="text-align:center ; color: red;">no data </h3>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

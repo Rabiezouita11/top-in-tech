@@ -1,0 +1,57 @@
+
+<h1 style="text-align:center ;">list de quizz</h1>
+
+
+<h1 style="text-align: center; color: red;"  *ngIf="listQuiz == 0" >
+
+pas de quiz pour le moment !
+
+</h1>
+
+<section class="section-1" id="section-1"   *ngFor="let item of listQuiz"  >
+
+
+
+  <main>
+    <div class="text-container">
+      <a id="btn" type="button" [routerLink]="['/Quiz/',item.id ]" class="btn btn-primary">{{item.titre_quiz}}</a>
+
+
+    </div>
+
+      <!-- <div class="form-control" style="font-size: 30px ;
+      text-align: center;">
+        <input #inputquiz1   [value]="item.option1"  type="radio" class="input-radio" [name]="item.id" >
+
+           {{item.option1}}
+<br>
+        <input #inputquiz2  [value]="item.option2"  type="radio" class="input-radio" [name]="item.id">
+
+           {{item.option2}}
+          <br>
+        <input  #inputquiz3  [value]="item.option3" type="radio" class="input-radio" [name]="item.id">
+
+          {{item.option3}}
+
+      </div>
+  <a id="btn" type="button" (click)="quiz(item.id, message, inputquiz1.checked, inputquiz2.checked, inputquiz3.checked)" class="btn btn-primary">Valider</a> -->
+
+
+  </main>
+
+</section>
+
+<!-- QUIZ ONE -->
+
+<!-- QUIZ TWO -->
+
+<!-- QUIZ THREE -->
+
+<!-- QUIZ FOUR -->
+
+<!-- QUIZ FIVE -->
+
+
+<!-- GAME OVER PAGE -->
+
+<!-- REFRESH PAGE SECTION -->

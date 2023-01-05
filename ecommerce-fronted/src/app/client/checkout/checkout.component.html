@@ -1,0 +1,173 @@
+<!-- <div class="container">
+  <h2 class="mt-5 mb-4">Angular Stripe Checkout Example</h2>
+  <div class="col-md-5 mb-2">
+    <button (click)="makePayment(15)" class="btn btn-danger btn-block">Pay $15</button>
+  </div>
+  <div class="col-md-5 mb-2">
+    <button (click)="makePayment(25)" class="btn btn-primary btn-block">Pay $25</button>
+  </div>
+  <div class="col-md-5">
+    <button (click)="makePayment(35)" class="btn btn-success btn-block">Pay $35</button>
+  </div>
+</div>
+ -->
+
+
+<div class="breadcrumb-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="page-title">
+          <h2>Check-out</h2>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <nav aria-label="breadcrumb" class="theme-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Check-out
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section-b-space">
+  <div class="container">
+    <div class="checkout-page">
+      <div class="checkout-form">
+        <form>
+          <div class="row">
+            <div class="col-lg-6 col-sm-12 col-xs-12">
+              <div class="checkout-title">
+                <h3>Billing Details</h3>
+              </div>
+              <div class="row check-out">
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                  <div class="field-label">Nom</div>
+                  <input
+                  [value]="nom"
+                    type="text"
+                    name="field-name"
+                    value=""
+                    placeholder=""  readonly
+                  />
+                </div>
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                  <div class="field-label">prenom</div>
+                  <input
+                    type="text"
+                    name="field-name"
+                    value=""
+                    placeholder=""
+                    [value]="prenom" readonly
+                  />
+                </div>
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                  <div class="field-label">cin</div>
+                  <input
+                    type="text"
+                    name="field-name"
+                    value=""
+                    placeholder=""
+                    [value]="cin" readonly
+                  />
+                </div>
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                  <div class="field-label">Email</div>
+                  <input
+                    type="text"
+                    name="field-name"
+                    value=""
+                    placeholder=""
+                    [value]="email" readonly
+                  />
+                </div>
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                  <div class="field-label">Ville</div>
+                  <input
+                  type="text"
+                  name="field-name"
+                  value=""
+                  placeholder=""
+
+                />
+                </div>
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                  <div class="field-label">Address</div>
+                  <select name="" id="">
+                    <option value="aa">aaaa</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                  <div class="field-label">Coupon</div>
+                  <select #inputcoupoun  name="" id="">
+                    <option value="0">0</option>
+                    <option  *ngFor="let item of listcoupon" [value]="item.id">{{item.prix}}</option>
+                  </select>
+                </div>
+
+
+
+
+              </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 col-xs-12"    >
+              <div class="checkout-details">
+                <div class="order-box">
+                  <div class="title-box">
+                    <div>Product <span>Total</span></div>
+                  </div>
+                  <ul class="qty">
+                    <li *ngFor="let item of listProduit">
+                      {{ item.produit.nom }} × {{ item.quantite }}
+                      <span>{{ item.prix }}</span>
+                    </li>
+                  </ul>
+                  <ul class="total">
+                    <li>
+                      Total
+                      <span class="count">{{ totalePrixPanier }} TND</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="payment-box">
+                  <div class="upper-box">
+                    <div class="payment-options">
+                      <ul>
+                        <li>
+
+                        </li>
+                        <li>
+
+                        </li>
+                        <li>
+
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                    <div   style="text-align: center;" class="text-end">
+                      <a (click)="PlaceOrder()" class="btn-solid btn">cash deleivery</a>
+                    </div>
+                    <br>
+                    <br>                  <div class="text-end">
+                      <a (click)="makePayment(totalePrixPanier)"class="btn-solid btn">Stripe</a>
+                    </div>
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

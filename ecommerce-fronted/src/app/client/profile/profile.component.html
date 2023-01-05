@@ -1,0 +1,178 @@
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="page-title">
+          <h2>profile</h2>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <nav aria-label="breadcrumb" class="theme-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">profile</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- breadcrumb End -->
+
+<!-- personal deatail section start -->
+<br />
+<br />
+<div style="text-align: center">
+  <div class="profile-top">
+    <div class="profile-image">
+      <img
+        [src]="image"
+        alt=""
+        [width]="200"
+        [height]="100"
+        style="border-radius: 100px"
+        class="img-fluid"
+      />
+    </div>
+    <div class="profile-detail">
+      <h5>{{ nom }}</h5>
+      <h6>{{ email }}</h6>
+    </div>
+  </div>
+</div>
+<section class="contact-page register-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>PERSONAL DETAIL</h3>
+        <form class="theme-form">
+          <div class="form-row row">
+            <div class="col-md-6">
+              <label for="name">nom</label>
+              <input
+                #inputnom
+                type="text"
+                class="form-control"
+                style="font-size: 15px"
+                [value]="nom"
+                id="name"
+                required=""
+              />
+              <input
+                #inputid
+                type="hidden"
+                class="form-control"
+                style="font-size: 15px"
+                [value]="id"
+                id="name"
+                required=""
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="email">prenom</label>
+              <input
+                #inputprenom
+                type="text"
+                class="form-control"
+                [value]="prenom"
+                style="font-size: 15px"
+                id="last-name"
+                required=""
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label for="email">email</label>
+              <input
+                #inputEmail
+                type="text"
+                class="form-control"
+                [value]="email"
+                style="font-size: 15px"
+                id="last-name"
+                required=""
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="review">cin</label>
+              <input
+                #inputcin
+                type="text"
+                class="form-control"
+                id="review"
+                style="font-size: 15px"
+                [value]="cin"
+                required=""
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="review">Image</label>
+              <input
+                #inputimage
+                type="text"
+                class="form-control"
+                id="review"
+                style="font-size: 15px"
+                type="file"
+              />
+            </div>
+
+            <div class="col-md-12" style="text-align: center"></div>
+          </div>
+        </form>
+        <div style="text-align: center">
+          <button class="btn btn-sm btn-solid" (click)="update()">
+            Modifer
+          </button>
+          <br />
+          <br />
+          <br />
+          <button
+            style="position: right"
+            class="btn btn-sm btn-solid"
+            routerLink="/changermotdepasse"
+          >
+            changer mot de passe
+          </button>
+
+          <br />
+          <br />
+          <br />
+          <button  *ngIf="date == null"
+            style="position: right"
+            class="btn btn-sm btn-solid"
+           (click)="delete()"
+          >
+          Supprimer mon compte
+          </button>
+          <br>
+          <br>
+          <br>
+          <button *ngIf="date !== null"
+          style="background-color: green;"
+          class="btn btn-sm btn-solid"
+         (click)="recupere()"
+        >
+          Recuperer mon compte
+        </button>
+        <br>
+        <br>
+        <div class="container" *ngIf="date !== null">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <h3 class="animate-charcter"> {{message}}</h3>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section ends -->
+
+<!-- address section start -->
+
+<!-- Section ends -->

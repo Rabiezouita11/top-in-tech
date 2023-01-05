@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="page-header-left">
+          <h3>Create Promotion
+            <small>Multikart Admin panel</small>
+          </h3>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <ol class="breadcrumb pull-right">
+          <li class="breadcrumb-item">
+            <a href="index.html">
+              <i data-feather="home"></i>
+            </a>
+          </li>
+          <li class="breadcrumb-item">Promotion </li>
+          <li class="breadcrumb-item active">Create Promotion </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card tab2-card">
+        <div class="card-body">
+
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade active show" id="account" role="tabpanel"
+                 aria-labelledby="account-tab">
+              <form class="needs-validation user-add"   [formGroup]="form" (ngSubmit)="onSubmit()"  >
+
+                <div class="form-group row">
+                  <label for="validationCustom0"
+                         class="col-xl-3 col-md-4"><span>*</span> Nom Produit</label>
+                  <div class="col-xl-8 col-md-7">
+                    <select   #inputIdproduit name=""             [ngClass]="{ 'is-invalid': submitted && f['idproduit'].errors }"  formControlName="idproduit"  id=""  class="form-control">
+                      <option *ngFor="let item of listProduitPromotion" [value]="item.id">{{item.nom}}</option>
+
+                    </select>
+
+                    <div      *ngIf="submitted && f['idproduit'].errors" class="invalid-feedback">
+                      <div *ngIf="f['idproduit'].errors['required']">id produit is required</div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="validationCustom1"
+                         class="col-xl-3 col-md-4"><span>*</span>Pourcentage</label>
+                  <div class="col-xl-8 col-md-7">
+                    <input     #inputpourcentage   [ngClass]="{ 'is-invalid': submitted && f['pourcentage'].errors }" formControlName="pourcentage" class="form-control" id="validationCustom1" type="number"
+                           required="">
+                           <div      *ngIf="submitted && f['pourcentage'].errors" class="invalid-feedback">
+                            <div *ngIf="f['pourcentage'].errors['required']">pourcentage is required</div>
+                          </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="validationCustom2"
+                         class="col-xl-3 col-md-4"><span>*</span> date fin Promtion </label>
+                  <div class="col-xl-8 col-md-7">
+                    <input  #inputdatefinpromotion  [ngClass]="{ 'is-invalid': submitted && f['promotion'].errors }"  formControlName="promotion"  class="form-control" id="validationCustom2" type="date"
+                           required="">
+                           <div      *ngIf="submitted && f['promotion'].errors" class="invalid-feedback">
+                            <div *ngIf="f['promotion'].errors['required']">promotion is required</div>
+                          </div>
+                  </div>
+                </div>
+
+                <div class="pull-right">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
