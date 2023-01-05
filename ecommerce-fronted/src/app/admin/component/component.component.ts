@@ -1,5 +1,7 @@
 import { ScriptService } from './../../Service/script/script.service';
 import { Component, OnInit, Renderer2 } from '@angular/core';
+import { SocketIOServiceService } from './../../Service/SocketIOService/socket-ioservice.service';
+import { ToastrService } from 'ngx-toastr';
 
 const SCRIPT_PATH_LIST =[
   "../../../assets/admin/js/jquery-3.3.1.min.js",
@@ -71,9 +73,22 @@ const SCRIPT_PATH_LIST =[
 export class ComponentComponent implements OnInit {
 
   constructor( private renderer: Renderer2,
-    private ScriptServiceService: ScriptService) { }
+    private ScriptServiceService: ScriptService,
+    private toastr: ToastrService,
+    private SocketIOServiceService : SocketIOServiceService) { }
 
     ngOnInit() {
+      this.SocketIOServiceService.listen('produit').subscribe((data: any) => {
+        console.log(data);
+        this.toastr.success('Un nouveau produit a été ajouté', data.produit, {
+          timeOut: 3000,
+          progressBar: true,
+          progressAnimation: 'increasing',
+          positionClass: 'toast-top-right',
+        });
+      });
+
+
       SCRIPT_PATH_LIST.forEach(e=> {
         const scriptElement = this.ScriptServiceService.loadJsScript(this.renderer, e);
         scriptElement.onload = () => {

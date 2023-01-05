@@ -27,6 +27,17 @@ listen (eventName: string) {
     }
     );
   }
+
+// listenn = (eventName: string) => {
+//     return new Promise((resolve, reject) => {
+//       this.socket.on(eventName, (data: any) => {
+//         resolve(data);
+//       });
+//     }
+//     );
+//   }
+
+
   on (eventName: string) {
     return new Observable((subscriber:any) => {
       this.socket.on(eventName, (data: any) => {

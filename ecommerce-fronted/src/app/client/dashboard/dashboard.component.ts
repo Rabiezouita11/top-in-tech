@@ -48,13 +48,16 @@ export class DashboardComponent implements OnInit {
             progressAnimation: 'increasing',
             positionClass: 'toast-top-right',
           });
-          this.http
-          .post('api/auth/logout', {}, { withCredentials: true })
-          .subscribe(() => (this.authenticated = false));
-          this.router.navigate(['/login']).then(() => {
-            window.location.reload();
-          });
+
+
         }
+        this.http
+        .post('api/auth/logout', {}, { withCredentials: true })
+        .subscribe(() => (this.authenticated = false));
+        this.router.navigate(['/login']).then(() => {
+          window.location.reload();
+        });
+
 
 
       });

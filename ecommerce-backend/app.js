@@ -322,14 +322,29 @@ io.on('connection', (socket) => {
   })
   });
 
+  socket.on('produits', (data ) => {
+    console.log('aa'+data)
+    db.produit.findOne({ where: { id : data } }).then(produit => {
+      if(produit.quantite == 0){
+        socket.broadcast.emit('produit', { produit: produit });
+      }
+    })
+  });
+
   // if product is not in stock send notification to admin 
 
+// setInterval(() => {
+//   db.produit.findAll().then(produit => {
+//     produit.forEach(produit => {
+//       if(produit.quantite == 0){
+//         socket.broadcast.emit('produit', { produit: produit });
+//       }
+//     })
+//   })
+// }, 1000);
 
-    db.produit.findAll ({ where: { quantite : 0 } }).then(produit => {
-      produit.forEach(produit => {
-        socket.broadcast.emit('produit', { produitId: produit.id });
-      })
-    })
+
+
 
   
     

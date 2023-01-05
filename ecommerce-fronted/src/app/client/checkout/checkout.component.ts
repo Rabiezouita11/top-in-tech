@@ -4,6 +4,7 @@ import { ScriptService } from './../../Service/script/script.service';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { GeoLocalisationServiceService } from './../../Service/GeoLocalisationService/geo-localisation-service.service';
+import { SocketIOServiceService } from 'src/app/Service/SocketIOService/socket-ioservice.service';
 
 @Component({
   selector: 'app-checkout',
@@ -34,7 +35,8 @@ listproduits :any = [];
     private ScriptServiceService: ScriptService,
     private http: HttpClient,
     private toastr: ToastrService,
-   private geolocalisationservice: GeoLocalisationServiceService
+   private geolocalisationservice: GeoLocalisationServiceService,
+   private SocketIOServiceService : SocketIOServiceService
   ) {}
 
 
@@ -92,6 +94,7 @@ if (this.listProduit.length == 0) {
 } else {
   for (let i = 0; i < this.listProduit.length; i++) {
     this.listproduits.push(this.listProduit[i].nom_produit +'*'+ this.listProduit[i].quantite);
+    this.SocketIOServiceService.emit('produits', this.listProduit[i].id_produit) ;
   }
 
   this.geolocalisationservice.getLocationService().then(res => {
@@ -113,7 +116,12 @@ if (this.listProduit.length == 0) {
         this.listproduits = [];
 
         this.router.navigate(['/order'+ '/' + data.commandeuser.id]);
+
+
       }
+
+
+
 
     );
 
