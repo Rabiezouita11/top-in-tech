@@ -8,6 +8,7 @@ import { ScriptService } from './../../Service/script/script.service';
 import { Subject } from 'rxjs/internal/Subject';
 import { Subscription, Observable, timer } from 'rxjs';
 import * as moment from 'moment';
+import { SocketIOServiceService } from './../../Service/SocketIOService/socket-ioservice.service';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
   idUser: number = 0;
   ListCountPanier: any;
   totalePrixPanier: any;
+  tt : number = 0;
 
   constructor(
     private router: Router,
@@ -30,7 +32,8 @@ export class HeaderComponent implements OnInit {
     private ScriptServiceService: ScriptService,
     private toastr: ToastrService,
     private http: HttpClient,
-    private currentRoute: ActivatedRoute
+    private currentRoute: ActivatedRoute,
+    private SocketIOServiceService : SocketIOServiceService,
   ) {
 
 
@@ -39,6 +42,11 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.SocketIOServiceService.listen('count').subscribe((data:any)=>{
+     console.log('**********************'+data.count);
+     this.ListCountPanier = data.count;
+    })
     this.showallCat();
 
     Emitters.authEmitter.subscribe((auth: boolean) => {
@@ -64,7 +72,9 @@ export class HeaderComponent implements OnInit {
               .get('api/panier/countCloneProduit/' + id)
               .subscribe((data: any) => {
                 this.ListCountPanier = data;
-
+         
+                
+                
                 console.log(this.ListCountPanier);
 
               }),

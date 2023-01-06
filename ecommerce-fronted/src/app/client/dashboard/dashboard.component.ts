@@ -149,6 +149,8 @@ export class DashboardComponent implements OnInit {
       );
       this.router.navigate(['/login']);
     }
+   
+
     this.http
       .post('api/panier/ajouterPanier', {
         id: id,
@@ -166,8 +168,8 @@ export class DashboardComponent implements OnInit {
           });
           // how refresh component headercomponent  after add produit to panier angular 13 ?
 
-
-
+          
+          this.SocketIOServiceService.emit('idusercountprdouit', id);
 
 
         },
@@ -180,6 +182,7 @@ export class DashboardComponent implements OnInit {
           });
         }
       );
+     
   }
 }
 

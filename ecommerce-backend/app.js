@@ -29,6 +29,7 @@ const coupon = require("./routes/coupon");
 const cors = require("cors");
 const { email } = require("./controllers/emaildeletePanier/email");
 const { emaildeletecoupoun } = require("./controllers/emaildeletePanier/emaildeletecoupoun");
+const { count } = require("console");
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -320,7 +321,15 @@ io.on('connection', (socket) => {
       console.log('user not ban')
     }
   })
-  });
+
+
+})
+
+
+
+
+
+
 
   socket.on('produits', (data ) => {
   db.produit.findAll().then(produit => {
@@ -331,7 +340,36 @@ io.on('connection', (socket) => {
     })
   })
   });
-  
+  socket.on('idusercountprdouit', (data) => {
+   
+    db.panier.findOne({ where: { id_user: data } }).then(panier => {
+    
+        db.panier.findOne({ where: { id_user: data } }).then(
+          panier => {
+            db.panier.findAll({
+              where: { id_user: data },
+              include: [
+                {
+                  model: db.produit,
+                  as: "produit",
+                },
+              ],
+            }).then(panier => {
+              var count = 0;
+              panier.forEach(panier => {
+                count += panier.quantite;
+              });
+              socket.emit('count', { count: count });
+            });
+          }
+        );
+      }
+    );
+  });
+      
+ 
+
+    
 
   // if product is not in stock send notification to admin 
 
