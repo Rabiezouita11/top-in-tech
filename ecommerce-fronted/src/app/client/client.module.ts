@@ -29,6 +29,7 @@ import { OrderComponent } from './checkout/order/order.component';
 
 
 
+
 @NgModule({
   declarations: [
 
@@ -53,7 +54,8 @@ import { OrderComponent } from './checkout/order/order.component';
         AvisComponent,
         ChangermotdepaseeComponent,
         ReponseComponent,
-        OrderComponent
+        OrderComponent,
+        
   ],
   providers: [DatePipe],
   imports: [

@@ -323,13 +323,15 @@ io.on('connection', (socket) => {
   });
 
   socket.on('produits', (data ) => {
-    console.log('aa'+data)
-    db.produit.findOne({ where: { id : data } }).then(produit => {
+  db.produit.findAll().then(produit => {
+    produit.forEach(produit => {
       if(produit.quantite == 0){
         socket.broadcast.emit('produit', { produit: produit });
       }
     })
+  })
   });
+  
 
   // if product is not in stock send notification to admin 
 

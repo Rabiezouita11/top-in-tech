@@ -80,7 +80,7 @@ export class ComponentComponent implements OnInit {
     ngOnInit() {
       this.SocketIOServiceService.listen('produit').subscribe((data: any) => {
         console.log(data);
-        this.toastr.success('Un nouveau produit a été ajouté', data.produit, {
+        this.toastr.error('Produit hors  stock', data.produit.nom, {
           timeOut: 3000,
           progressBar: true,
           progressAnimation: 'increasing',

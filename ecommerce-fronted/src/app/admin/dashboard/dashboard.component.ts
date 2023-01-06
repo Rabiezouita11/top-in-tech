@@ -32,8 +32,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private currentRoute: ActivatedRoute,
-    private http: HttpClient,
-    private SocketIOServiceService : SocketIOServiceService
+    private http: HttpClient
   ) {}
 
   getProduit(idprdouits: number) {
@@ -67,11 +66,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
 
-this.SocketIOServiceService.listen('produit').subscribe((data:any)=>{
-  console.log(data);
-  this.toastr.success('New produit added', 'produit');
-
-})
 
 
 

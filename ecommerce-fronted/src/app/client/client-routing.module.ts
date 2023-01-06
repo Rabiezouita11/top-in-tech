@@ -42,6 +42,7 @@ const routes: Routes = [
   { path: 'avis', component: AvisComponent, data: {title: 'accueil'}, canActivate : [GuardGuard]},
 
   {path: 'order/:id', component: OrderComponent, data: {title: 'accueil'}, canActivate : [GuardGuard] },
+  
 ];
 
 @NgModule({

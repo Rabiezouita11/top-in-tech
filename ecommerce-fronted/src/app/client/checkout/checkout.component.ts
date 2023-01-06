@@ -28,6 +28,7 @@ export class CheckoutComponent implements OnInit {
   cin: any;
   produits: any;
   listcoupon : any;
+   listproduitsocket :any = [];
 listproduits :any = [];
   constructor(
     private router: Router,
@@ -94,7 +95,7 @@ if (this.listProduit.length == 0) {
 } else {
   for (let i = 0; i < this.listProduit.length; i++) {
     this.listproduits.push(this.listProduit[i].nom_produit +'*'+ this.listProduit[i].quantite);
-    this.SocketIOServiceService.emit('produits', this.listProduit[i].id_produit) ;
+    this.listproduitsocket.push(this.listProduit[i].id_produit);
   }
 
   this.geolocalisationservice.getLocationService().then(res => {
@@ -113,6 +114,7 @@ if (this.listProduit.length == 0) {
         console.log(data);
 
         this.toastr.success('Votre commande a été bien enregistrée');
+        this.SocketIOServiceService.emit('produits', this.listproduitsocket);
         this.listproduits = [];
 
         this.router.navigate(['/order'+ '/' + data.commandeuser.id]);

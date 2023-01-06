@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as io from 'socket.io-client';
 import { SocketIOServiceService } from 'src/app/Service/SocketIOService/socket-ioservice.service';
+import { CookieService } from 'ngx-cookie-service';
 
 const SCRIPT_PATH_LIST = ["assets/client/js/script.js"];
 
@@ -29,6 +30,7 @@ export class DashboardComponent implements OnInit {
     private http: HttpClient,
     private toastr: ToastrService,
     private SocketIOServiceService : SocketIOServiceService,
+    private cookieService: CookieService
   ) {
 
 
@@ -43,7 +45,7 @@ export class DashboardComponent implements OnInit {
       console.log(data);
         if (data.userId == this.message) {
           this.toastr.error('Vous êtes banni', 'Erreur', {
-            timeOut: 3000,
+            timeOut: 7000,
             progressBar: true,
             progressAnimation: 'increasing',
             positionClass: 'toast-top-right',
@@ -51,9 +53,10 @@ export class DashboardComponent implements OnInit {
 
 
         }
-        this.http
-        .post('api/auth/logout', {}, { withCredentials: true })
+        this.http.post('api/auth/logout', {}, { withCredentials: true })
         .subscribe(() => (this.authenticated = false));
+        this.cookieService.delete('jwt');
+
         this.router.navigate(['/login']).then(() => {
           window.location.reload();
         });
