@@ -21,6 +21,7 @@ import { AjouterPromotionComponent } from './promotion/ajouter-promotion/ajouter
 import { ClientComponent } from './client/client.component';
 import { ContactComponent } from './contact/contact.component';
 import { NgChartsModule } from 'ng2-charts';
+import { AvisComponent } from './avis/avis.component';
 @NgModule({
   declarations: [
     QuizComponent,
@@ -39,7 +40,8 @@ import { NgChartsModule } from 'ng2-charts';
     PromotionComponent,
     AjouterPromotionComponent,
     ClientComponent,
-    ContactComponent
+    ContactComponent,
+    AvisComponent
   ],
   exports: [HeaderComponent, FooterComponent],
   imports: [CommonModule, AdminRoutingModule, ReactiveFormsModule, FormsModule , NgChartsModule],

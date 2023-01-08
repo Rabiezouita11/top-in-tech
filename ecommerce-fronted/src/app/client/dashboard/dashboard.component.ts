@@ -8,7 +8,7 @@ import * as io from 'socket.io-client';
 import { SocketIOServiceService } from 'src/app/Service/SocketIOService/socket-ioservice.service';
 import { CookieService } from 'ngx-cookie-service';
 
-const SCRIPT_PATH_LIST = ["assets/client/js/script.js"];
+const SCRIPT_PATH_LIST = ['assets/client/js/script.js'];
 
 @Component({
   selector: 'app-dashboard',
@@ -29,54 +29,24 @@ export class DashboardComponent implements OnInit {
     private ScriptServiceService: ScriptService,
     private http: HttpClient,
     private toastr: ToastrService,
-    private SocketIOServiceService : SocketIOServiceService,
+    private SocketIOServiceService: SocketIOServiceService,
     private cookieService: CookieService
-  ) {
-
-
-
-  }
+  ) {}
 
   ngOnInit() {
+   
 
+    // this.socket.on('ban', (data) => {
+    //   if (data == 'user ban') {
+    //     this.toastr.error('Vous êtes banni', 'Erreur', {
+    //       timeOut: 3000,
+    //       progressBar: true,
+    //       progressAnimation: 'increasing',
+    //       positionClass: 'toast-top-right',
+    //     });
+    //   }
 
-    this.SocketIOServiceService.listen('ban').subscribe((data: any) => {
-      console.log(data.userId);
-      console.log(data);
-        if (data.userId == this.message) {
-          this.toastr.error('Vous êtes banni', 'Erreur', {
-            timeOut: 7000,
-            progressBar: true,
-            progressAnimation: 'increasing',
-            positionClass: 'toast-top-right',
-          });
-
-
-        }
-        this.http.post('api/auth/logout', {}, { withCredentials: true })
-        .subscribe(() => (this.authenticated = false));
-        this.cookieService.delete('jwt');
-
-        this.router.navigate(['/login']).then(() => {
-          window.location.reload();
-        });
-
-
-
-      });
-
-// this.socket.on('ban', (data) => {
-//   if (data == 'user ban') {
-//     this.toastr.error('Vous êtes banni', 'Erreur', {
-//       timeOut: 3000,
-//       progressBar: true,
-//       progressAnimation: 'increasing',
-//       positionClass: 'toast-top-right',
-//     });
-//   }
-
-
-// });
+    // });
 
     SCRIPT_PATH_LIST.forEach((e) => {
       const scriptElement = this.ScriptServiceService.loadJsScript(
@@ -94,8 +64,6 @@ export class DashboardComponent implements OnInit {
       };
     });
     // refresh page after add produit to panier
-
-
 
     this.http.get('api/auth/getUser', { withCredentials: true }).subscribe(
       (res: any) => {
@@ -128,12 +96,7 @@ export class DashboardComponent implements OnInit {
         console.log(error);
       }
     });
-
-
-
-
   }
-
 
   ajouterPanier(id: number, idProduit: number, prix: number) {
     if (id == null) {
@@ -149,7 +112,6 @@ export class DashboardComponent implements OnInit {
       );
       this.router.navigate(['/login']);
     }
-   
 
     this.http
       .post('api/panier/ajouterPanier', {
@@ -164,14 +126,10 @@ export class DashboardComponent implements OnInit {
             progressBar: true,
             progressAnimation: 'increasing',
             positionClass: 'toast-top-right',
-
           });
           // how refresh component headercomponent  after add produit to panier angular 13 ?
 
-          
           this.SocketIOServiceService.emit('idusercountprdouit', id);
-
-
         },
         (error) => {
           this.toastr.error('Produit deja ajouté au panier', 'Erreur', {
@@ -182,7 +140,6 @@ export class DashboardComponent implements OnInit {
           });
         }
       );
-     
   }
 }
 

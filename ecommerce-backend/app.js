@@ -26,6 +26,7 @@ const commandeAdmin = require("./routes/commandeAdmin");
 const db = require("./models/index");
 const checkout = require("./routes/checkout");
 const coupon = require("./routes/coupon");
+const avis = require("./routes/avis");
 const cors = require("cors");
 const { email } = require("./controllers/emaildeletePanier/email");
 const { emaildeletecoupoun } = require("./controllers/emaildeletePanier/emaildeletecoupoun");
@@ -86,6 +87,7 @@ app.use('/totale', Totale)
 app.use('/coupon', coupon)
 app.use("/like", likeRouter); // http://localhost:8080/like
 app.use("/noterproduit", noterProduitRouter);
+app.use("/avis", avis);
 // http://localhost:8080/paiment
 
 
@@ -367,6 +369,42 @@ io.on('connection', (socket) => {
     );
   });
       
+ socket.on('singleavis', (data) => {
+
+    console.log(data.id)
+    console.log(data.idUser)
+    db.avis.findOne({ where: { id_user: data.idUser, id: data.id } }).then(avis => {
+      if(avis){
+        socket.broadcast.emit('avis', { avis: avis.message , idUser: data.idUser  });
+        console.log(avis)
+
+        db.avis.findAll({
+          include: [
+            {
+              model: user,
+              attributes: ["nom"],
+            },
+            {
+              model: user,
+              attributes: ["image"],
+            },
+            {
+              model: user,
+              attributes: ["id"],
+            }
+          ],
+        }).then(avis => {
+        
+            socket.broadcast.emit('listavis', avis);
+            console.log(avis)
+          
+        }
+        )
+
+      }
+       
+    })
+ })
  
 
     

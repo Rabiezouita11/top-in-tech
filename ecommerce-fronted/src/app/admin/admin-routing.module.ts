@@ -20,6 +20,7 @@ import {LivreurComponent} from "./livreur/livreur.component";
 import {AjouterLivreurComponent} from "./livreur/ajouter-livreur/ajouter-livreur.component";
 import {UpdateLivreurComponent} from "./livreur/update-livreur/update-livreur.component";
 import {ContactComponent} from "./contact/contact.component";
+import { AvisComponent } from './avis/avis.component';
 
 
 const routes: Routes = [
@@ -47,7 +48,9 @@ const routes: Routes = [
   { path: 'listlivreur', component: LivreurComponent , data: {title: 'Product'} } ,
   { path: 'AjouterLivreur', component: AjouterLivreurComponent , data: {title: 'Product'} } ,
   { path: 'UpdateLivreur', component: UpdateLivreurComponent , data: {title: 'Product'} } ,
-  { path: 'Contact', component: ContactComponent , data: {title: 'Product'} }
+  { path: 'Contact', component: ContactComponent , data: {title: 'Product'} },
+  { path: 'avisAdmin', component: AvisComponent , data: {title: 'Product'} },
+
 ];
 
 @NgModule({

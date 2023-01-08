@@ -26,147 +26,36 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <ul class="comment-section">
-          <li>
-            <div class="media"><img src="../assets/client/images/avtar.jpg" alt="Generic placeholder image">
+        <button
+        type="button"
+        class="btn btn-solid"
+
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+      ajouter avis
+      </button>
+      <br>
+      <br>
+      <div *ngIf="list?.length == 0" class="text-center">
+        <h3 style="text-align: center; color: red"> Aucun avis </h3>
+      </div>
+        <ul class="comment-section"  *ngFor="let item of list">
+          
+         
+          <li  >
+            <div class="media"><img src="api/{{item.user.image}}" alt="Generic placeholder image">
               <div class="media-body">
-                <h6>Mark Jecno <span>( 12 Jannuary 2018 at 1:30AM )</span></h6>
-                <p>Donec rhoncus massa quis nibh imperdiet dictum. Vestibulum id est sit amet felis
-                  fringilla bibendum at at leo. Proin molestie ac nisi eu laoreet. Integer
-                  faucibus enim nec ullamcorper tempor. Aenean nec felis dui. Integer tristique
-                  odio mi, in volutpat metus posuere eu. Aenean suscipit ipsum nunc, id volutpat
-                  lorem hendrerit ac. Sed id elit quam. In ac mauris arcu. Praesent eget lectus
-                  sit amet diam vestibulum varius. Suspendisse dignissim mattis leo, nec facilisis
-                  erat tempor quis. Vestibulum eu vestibulum ex.</p>
-                <ul class="comnt-sec">
-                  <li>
-                    <a href="#">
-                      <i class="far fa-thumbs-up"></i>
-                      <span>(14)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="far fa-thumbs-down"></i>
-                      <span>(2)</span>
-                    </a>
-                  </li>
-                </ul>
+                <h6>{{item.user.nom}} <span>{{item.date}}</span></h6>
+                <p *ngIf="item.etat == null" >{{item.message}} </p>
+                <p *ngIf="item.etat == 1" style="color: red; font-size: 20px;"> Signaler </p>
+
+
               </div>
             </div>
           </li>
-          <li>
-            <div class="media"><img src="../assets/client/images/2.jpg" alt="Generic placeholder image">
-              <div class="media-body">
-                <h6>Mark Jecno <span>( 12 Jannuary 2018 at 1:30AM )</span></h6>
-                <p>Donec rhoncus massa quis nibh imperdiet dictum. Vestibulum id est sit amet felis
-                  fringilla bibendum at at leo. Proin molestie ac nisi eu laoreet. Integer
-                  faucibus enim nec ullamcorper tempor. Aenean nec felis dui. Integer tristique
-                  odio mi, in volutpat metus posuere eu. Aenean suscipit ipsum nunc, id volutpat
-                  lorem hendrerit ac. Sed id elit quam. In ac mauris arcu. Praesent eget lectus
-                  sit amet diam vestibulum varius. Suspendisse dignissim mattis leo, nec facilisis
-                  erat tempor quis. Vestibulum eu vestibulum ex.</p>
-                <ul class="comnt-sec">
-                  <li>
-                    <a href="#">
-                      <i class="far fa-thumbs-up"></i>
-                      <span>(14)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="far fa-thumbs-down"></i>
-                      <span>(2)</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="media"><img src="../assets/client/images/20.jpg" alt="Generic placeholder image">
-              <div class="media-body">
-                <h6>Mark Jecno <span>( 12 Jannuary 2018 at 1:30AM )</span></h6>
-                <p>Donec rhoncus massa quis nibh imperdiet dictum. Vestibulum id est sit amet felis
-                  fringilla bibendum at at leo. Proin molestie ac nisi eu laoreet. Integer
-                  faucibus enim nec ullamcorper tempor. Aenean nec felis dui. Integer tristique
-                  odio mi, in volutpat metus posuere eu. Aenean suscipit ipsum nunc, id volutpat
-                  lorem hendrerit ac. Sed id elit quam. In ac mauris arcu. Praesent eget lectus
-                  sit amet diam vestibulum varius. Suspendisse dignissim mattis leo, nec facilisis
-                  erat tempor quis. Vestibulum eu vestibulum ex.</p>
-                <ul class="comnt-sec">
-                  <li>
-                    <a href="#">
-                      <i class="far fa-thumbs-up"></i>
-                      <span>(14)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="far fa-thumbs-down"></i>
-                      <span>(2)</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="media"><img src="../assets/client/images/avtar.jpg" alt="Generic placeholder image">
-              <div class="media-body">
-                <h6>Mark Jecno <span>( 12 Jannuary 2018 at 1:30AM )</span></h6>
-                <p>Donec rhoncus massa quis nibh imperdiet dictum. Vestibulum id est sit amet felis
-                  fringilla bibendum at at leo. Proin molestie ac nisi eu laoreet. Integer
-                  faucibus enim nec ullamcorper tempor. Aenean nec felis dui. Integer tristique
-                  odio mi, in volutpat metus posuere eu. Aenean suscipit ipsum nunc, id volutpat
-                  lorem hendrerit ac. Sed id elit quam. In ac mauris arcu. Praesent eget lectus
-                  sit amet diam vestibulum varius. Suspendisse dignissim mattis leo, nec facilisis
-                  erat tempor quis. Vestibulum eu vestibulum ex.</p>
-                <ul class="comnt-sec">
-                  <li>
-                    <a href="#">
-                      <i class="far fa-thumbs-up"></i>
-                      <span>(14)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="far fa-thumbs-down"></i>
-                      <span>(2)</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="media"><img src="../assets/client/images/2.jpg" alt="Generic placeholder image">
-              <div class="media-body">
-                <h6>Mark Jecno <span>( 12 Jannuary 2018 at 1:30AM )</span></h6>
-                <p>Donec rhoncus massa quis nibh imperdiet dictum. Vestibulum id est sit amet felis
-                  fringilla bibendum at at leo. Proin molestie ac nisi eu laoreet. Integer
-                  faucibus enim nec ullamcorper tempor. Aenean nec felis dui. Integer tristique
-                  odio mi, in volutpat metus posuere eu. Aenean suscipit ipsum nunc, id volutpat
-                  lorem hendrerit ac. Sed id elit quam. In ac mauris arcu. Praesent eget lectus
-                  sit amet diam vestibulum varius. Suspendisse dignissim mattis leo, nec facilisis
-                  erat tempor quis. Vestibulum eu vestibulum ex.</p>
-                <ul class="comnt-sec">
-                  <li>
-                    <a href="#">
-                      <i class="far fa-thumbs-up"></i>
-                      <span>(14)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="far fa-thumbs-down"></i>
-                      <span>(2)</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </li>
+
+
         </ul>
       </div>
     </div>
@@ -174,5 +63,34 @@
 </section>
 <!-- Section ends -->
 
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ajouter avis</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control"  #inputMessage name="" id="" cols="30" rows="10"></textarea>
+
+        <div style="text-align: center">
+
+          <button type="button" (click)="ajouter()" class="btn btn-success" data-bs-dismiss="modal" >ajouter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- footer start -->

@@ -4,6 +4,7 @@ import { ScriptService } from './../../Service/script/script.service';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { HeaderComponent } from '../header/header.component';
+import { SocketIOServiceService } from 'src/app/Service/SocketIOService/socket-ioservice.service';
 
 @Component({
   selector: 'app-cart',
@@ -24,7 +25,8 @@ export class CartComponent implements OnInit {
     private renderer: Renderer2,
     private ScriptServiceService: ScriptService,
     private http: HttpClient,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private SocketIOServiceService : SocketIOServiceService
   ) {}
 
 
@@ -140,6 +142,7 @@ this.idproduit = idProduit;
         this.http.get('api/panier/afficherPanierparId/'+idProduit).subscribe(
           (data:any)=>{
             this.listProduit=data;
+            this.SocketIOServiceService.emit('idusercountprdouit', id);
       this.ngOnInit();
           }
         )
