@@ -58,8 +58,8 @@
 
               <tbody>
                 <tr *ngFor="let items of list; let i = index">
-                  <td data-field="id">{{ items.id }}</td>
-                  <td data-field="name">{{ items.user.nom }}</td>
+                  <td >{{ items.id }}</td>
+                  <td >{{ items.user.nom }}</td>
                   <td>
                     <img src="/api/{{ items.user.image }}" alt="" />
                   </td>

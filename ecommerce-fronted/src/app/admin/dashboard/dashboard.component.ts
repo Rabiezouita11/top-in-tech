@@ -1,10 +1,71 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, SimpleChanges } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Loader } from '@googlemaps/js-api-loader';
-import { ChartType } from 'chart.js';
+import * as Chart from 'chart.js';
+
 import { SocketIOServiceService } from 'src/app/Service/SocketIOService/socket-ioservice.service';
+
+const SCRIPT_PATH_LIST =[
+  "../../../assets/admin/js/jquery-3.3.1.min.js",
+
+
+  "assets/admin/js/bootstrap.bundle.min.js",
+
+
+  "assets/admin/js/icons/feather-icon/feather.min.js",
+  "assets/admin/js/icons/feather-icon/feather-icon.js",
+
+
+  "assets/admin/js/sidebar-menu.js",
+
+
+
+
+
+
+
+
+  "assets/admin/js/lazysizes.min.js",
+
+  "assets/admin/js/prism/prism.min.js",
+  "assets/admin/js/clipboard/clipboard.min.js",
+  "assets/admin/js/custom-card/custom-card.js",
+
+
+  "assets/admin/js/counter/jquery.waypoints.min.js",
+  "assets/admin/js/counter/jquery.counterup.min.js",
+  "assets/admin/js/counter/counter-custom.js",
+
+
+  "assets/admin/js/chart/peity-chart/peity.jquery.js",
+
+
+  "https://cdn.jsdelivr.net/npm/apexcharts",
+
+
+  "assets/admin/js/chart/sparkline/sparkline.js",
+
+
+
+
+
+  "assets/admin/js/dashboard/default.js",
+
+
+  "assets/admin/js/chat-menu.js",
+
+
+  "assets/admin/js/height-equal.js",
+
+
+  "assets/admin/js/lazysizes.min.js",
+
+
+  "assets/admin/js/admin-script.js",
+  ]
+
 
 @Component({
   selector: 'app-dashboard',
@@ -23,8 +84,10 @@ export class DashboardComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true,
   };
-  public barChartType: ChartType = 'pie';
+  public barChartType: Chart.ChartType = 'pie';
   public barChartLegend = true;
+  chart: any;
+  numConnectedClients: any;
 
   // public barChartLabels= ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'];
   // public barChartData = {data: [70,80,90], label: 'IMC'};
@@ -32,8 +95,12 @@ export class DashboardComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private currentRoute: ActivatedRoute,
-    private http: HttpClient
-  ) {}
+    private http: HttpClient,
+    private SocketIOServiceService : SocketIOServiceService
+  ) {
+
+
+  }
 
   getProduit(idprdouits: number) {
     this.http
@@ -64,12 +131,42 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  ngOnInit() {
+  ngOnInit( ) {
+
+ 
+ 
+        // refresh the chart every 5 seconds 
+
+ 
+
+        
+    this.chart = new Chart.Chart('canvas', {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Number of Active Clients',
+          data: [],
+          backgroundColor: 'rgba(0, 0, 0, 0)',
+          borderColor: 'rgb(255, 99, 132)',
+        }]
+      },
+    
+    });
+   
+
+    this.SocketIOServiceService.listen('active-clients-changed').subscribe((data:any)=>{
+      console.log('chart'+data.numConnectedClients);
+      this.chart.data.labels.push(data.date);
+      this.chart.data.datasets[0].data.push(data.numConnectedClients);
+      this.chart.update();
+   
+    })
 
 
+ 
 
-
-    this.getProduit(2);
+    // this.getProduit(2);
 
     // this.http.get('api/totale/afficheRate' + '/'+ 2).subscribe(
     //   (data:any)=>{

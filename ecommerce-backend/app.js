@@ -308,8 +308,15 @@ shedule.scheduleJob("*/2 * * * * * ", () => {
   deletecouponbyetat();
 });
 const io = require('socket.io')(server);
+let numConnectedClients = 0;
 io.on('connection', (socket) => {
   console.log('a user connected');
+
+  numConnectedClients++;
+  console.log(numConnectedClients);
+  socket.broadcast.emit('active-clients-changed', { numConnectedClients : numConnectedClients , date : new Date() });
+  socket.emit('active-clients-changed', { numConnectedClients : numConnectedClients , date : new Date() });
+
   socket.on('message', (aa) => {
     console .log(aa)
     db.user.findOne({ where: { id : aa } }).then(user => {
@@ -431,6 +438,10 @@ io.on('connection', (socket) => {
   
   socket.on('disconnect', () => {
     console.log('user disconnected');
+    numConnectedClients--;
+    console.log(numConnectedClients);
+    socket.broadcast.emit('active-clients-changed', { numConnectedClients : numConnectedClients , date : new Date() });
+    socket.emit('active-clients-changed', { numConnectedClients : numConnectedClients , date : new Date() });
   });
   // how recupere user if ban or not 
 

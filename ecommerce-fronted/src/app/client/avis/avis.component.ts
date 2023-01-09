@@ -73,6 +73,13 @@ export class AvisComponent implements OnInit {
   ajouter() {
 console.log(this.inputMessage.nativeElement.value);
 console.log(this.message);
+if (this.inputMessage.nativeElement.value == '') {
+  this.toastr.error('Veuillez saisir un avis', 'Erreur', {
+    timeOut: 3000,
+    positionClass: 'toast-top-right',
+  });
+  return;
+}
 this.http.post('api/avis/ajouter', {comment: this.inputMessage.nativeElement.value, id_user: this.message}, { withCredentials: true }).subscribe(
   (res: any) => {
     console.log(res);
