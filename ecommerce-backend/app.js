@@ -317,6 +317,14 @@ io.on('connection', (socket) => {
   socket.broadcast.emit('active-clients-changed', { numConnectedClients : numConnectedClients , date : new Date() });
   socket.emit('active-clients-changed', { numConnectedClients : numConnectedClients , date : new Date() });
 
+  socket.on('xx', (data) => {
+    
+    socket.emit('active-clients-changed', { numConnectedClients : numConnectedClients , date : new Date() });
+   
+
+  })
+
+
   socket.on('message', (aa) => {
     console .log(aa)
     db.user.findOne({ where: { id : aa } }).then(user => {

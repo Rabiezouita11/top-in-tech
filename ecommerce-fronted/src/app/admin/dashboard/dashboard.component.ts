@@ -136,7 +136,9 @@ export class DashboardComponent implements OnInit {
  
  
         // refresh the chart every 5 seconds 
+    
 
+this.SocketIOServiceService.emit('xx', 'xx');
  
 
         
