@@ -31,6 +31,7 @@ const cors = require("cors");
 const { email } = require("./controllers/emaildeletePanier/email");
 const { emaildeletecoupoun } = require("./controllers/emaildeletePanier/emaildeletecoupoun");
 const { count } = require("console");
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -386,12 +387,11 @@ io.on('connection', (socket) => {
       
  socket.on('singleavis', (data) => {
 
-    console.log(data.id)
-    console.log(data.idUser)
+
     db.avis.findOne({ where: { id_user: data.idUser, id: data.id } }).then(avis => {
       if(avis){
         socket.broadcast.emit('avis', { avis: avis.message , idUser: data.idUser  });
-        console.log(avis)
+   
 
         db.avis.findAll({
           include: [
@@ -420,9 +420,15 @@ io.on('connection', (socket) => {
        
     })
  })
- 
 
-    
+
+//  socket.on('chat', (message) => {
+//   const response =  nltk.generateResponse(message);
+//   socket.emit('chat', response);
+//   console.log(response)
+// });
+
+
 
   // if product is not in stock send notification to admin 
 
