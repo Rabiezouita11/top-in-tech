@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { Emitters } from 'src/app/emitters/emitter';
 import { filter } from 'rxjs';
+import { SocketIOServiceService } from './../../Service/SocketIOService/socket-ioservice.service';
 
 const SCRIPT_PATH_LIST = [
   'assets/client/js/script.js',
@@ -28,7 +29,8 @@ export class SingleCategorieComponent implements OnInit {
     private ScriptServiceService: ScriptService,
     private toastr: ToastrService,
     private http: HttpClient,
-    private currentRoute: ActivatedRoute
+    private currentRoute: ActivatedRoute,
+    private SocketIOServiceService: SocketIOServiceService
   ) {
     // how reload page angular with router navigate ?
     this.route = this._router.url;
@@ -42,7 +44,7 @@ export class SingleCategorieComponent implements OnInit {
       );
       scriptElement.onload = () => {
         console.log('loaded');
-        
+
     const id = this.currentRoute.snapshot.paramMap.get('id');
 
     this.http.get('api/auth/getUser', { withCredentials: true }).subscribe(
@@ -135,6 +137,7 @@ export class SingleCategorieComponent implements OnInit {
       );
       this._router.navigate(['/login']);
     }
+
     this.http
       .post('api/panier/ajouterPanier', {
         id: id,
@@ -149,15 +152,39 @@ export class SingleCategorieComponent implements OnInit {
             progressAnimation: 'increasing',
             positionClass: 'toast-top-right',
           });
+          // how refresh component headercomponent  after add produit to panier angular 13 ?
+
+          this.SocketIOServiceService.emit('idusercountprdouit', id);
         },
         (error) => {
-          this.toastr.error('produit existe déjà dans le panier', 'Erreur', {
-            timeOut: 3000,
-            progressBar: true,
-            progressAnimation: 'increasing',
-            positionClass: 'toast-top-right',
-          });
+       if (error.status == 401) {
+            this.toastr.error('Produit déjà dans le panier', 'Erreur', {
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+              positionClass: 'toast-top-right',
+            });
+
+          }else if (error.status == 400) {
+            this.toastr.error('Produit hors stock', 'Erreur', {
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+              positionClass: 'toast-top-right',
+            });
+
+          }
+          else{
+            this.toastr.warning('Serveur indisponible', 'Erreur', {
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+              positionClass: 'toast-top-right',
+            });
+          }
+
         }
       );
-  }
+}
+
 }

@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-   
+
 
     // this.socket.on('ban', (data) => {
     //   if (data == 'user ban') {
@@ -132,12 +132,32 @@ export class DashboardComponent implements OnInit {
           this.SocketIOServiceService.emit('idusercountprdouit', id);
         },
         (error) => {
-          this.toastr.error('Produit deja ajouté au panier', 'Erreur', {
-            timeOut: 3000,
-            progressBar: true,
-            progressAnimation: 'increasing',
-            positionClass: 'toast-top-right',
-          });
+       if (error.status == 401) {
+            this.toastr.error('Produit déjà dans le panier', 'Erreur', {
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+              positionClass: 'toast-top-right',
+            });
+
+          }else if (error.status == 400) {
+            this.toastr.error('Produit hors stock', 'Erreur', {
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+              positionClass: 'toast-top-right',
+            });
+
+          }
+          else{
+            this.toastr.warning('Serveur indisponible', 'Erreur', {
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+              positionClass: 'toast-top-right',
+            });
+          }
+
         }
       );
   }

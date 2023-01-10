@@ -64,42 +64,19 @@
                   <span class="dot"></span>
                   <ul class="notification-dropdown onhover-show-div p-0">
                       <li>Notification <span class="badge badge-pill badge-primary pull-right">3</span></li>
-                      <li>
+                      <li *ngFor="let item of listCommande">
                           <div class="media">
                               <div class="media-body">
                                   <h6 class="mt-0">
                                       <span>
                                           <i class="shopping-color" data-feather="shopping-bag"></i>
-                                      </span>Your order ready for Ship..!
+                                      </span> {{item.user.nom}}
                                   </h6>
-                                  <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
+                                  <p class="mb-0">{{item.Produit}}</p>
                               </div>
                           </div>
                       </li>
-                      <li>
-                          <div class="media">
-                              <div class="media-body">
-                                  <h6 class="mt-0 txt-success">
-                                      <span>
-                                          <i class="download-color font-success" data-feather="download"></i>
-                                      </span>Download Complete
-                                  </h6>
-                                  <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
-                              </div>
-                          </div>
-                      </li>
-                      <li>
-                          <div class="media">
-                              <div class="media-body">
-                                  <h6 class="mt-0 txt-danger">
-                                      <span>
-                                          <i class="alert-color font-danger" data-feather="alert-circle"></i>
-                                      </span>250 MB trash files
-                                  </h6>
-                                  <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
-                              </div>
-                          </div>
-                      </li>
+                   
                       <li class="txt-dark"><a href="javascript:void(0)">All</a> notification</li>
                   </ul>
               </li>

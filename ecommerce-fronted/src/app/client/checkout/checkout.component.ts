@@ -1,4 +1,10 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Renderer2,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { ScriptService } from './../../Service/script/script.service';
 import { HttpClient } from '@angular/common/http';
@@ -12,12 +18,10 @@ import { SocketIOServiceService } from 'src/app/Service/SocketIOService/socket-i
   styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
-
-
   @ViewChild('inputcoupoun') inputcoupoun!: ElementRef;
-  cash = "cash";
-  stripe = "stripe";
-   idd : any;
+  cash = 'cash';
+  stripe = 'stripe';
+  idd: any;
   authenticated = false;
   listProduit: any;
   paymentHandler: any = null;
@@ -27,23 +31,20 @@ export class CheckoutComponent implements OnInit {
   email: any;
   cin: any;
   produits: any;
-  listcoupon : any;
-   listproduitsocket :any = [];
-listproduits :any = [];
+  listcoupon: any;
+  listproduitsocket: any = [];
+  listproduits: any = [];
   constructor(
     private router: Router,
     private renderer: Renderer2,
     private ScriptServiceService: ScriptService,
     private http: HttpClient,
     private toastr: ToastrService,
-   private geolocalisationservice: GeoLocalisationServiceService,
-   private SocketIOServiceService : SocketIOServiceService
+    private geolocalisationservice: GeoLocalisationServiceService,
+    private SocketIOServiceService: SocketIOServiceService
   ) {}
 
-
-
   ngOnInit() {
-
 
     try {
       this.http
@@ -62,143 +63,147 @@ listproduits :any = [];
             .get('api/panier/afficherPanierparId/' + id)
             .subscribe((data: any) => {
               this.listProduit = data;
-
-
-
+              for (let i = 0; i < this.listProduit.length; i++) {
+                this.SocketIOServiceService.emit(
+                  'commandeClient',
+                  this.listProduit[i].id_produit
+                );
+              }
             }),
             this.http
               .get('api/panier/totaleprixpanier/' + id)
               .subscribe((data: any) => {
                 this.totalePrixPanier = data;
-
               }),
-              this.http.get('api/coupon/affichecouponbyiduser/' + id).subscribe(
-                (data: any) => {
-                  this.listcoupon = data;
-                }
-              );
+            this.http
+              .get('api/coupon/affichecouponbyiduser/' + id)
+              .subscribe((data: any) => {
+                this.listcoupon = data;
+              });
         });
     } catch (error) {
       this.authenticated = false;
     }
 
     this.invokeStripe();
-  }
-
-
-  PlaceOrder()  {
-console.log('***********************')
-console.log(this.inputcoupoun.nativeElement.value)
-
-if (this.listProduit.length == 0) {
-  this.toastr.error('Votre panier est vide');
-} else {
-  for (let i = 0; i < this.listProduit.length; i++) {
-    this.listproduits.push(this.listProduit[i].nom_produit +'*'+ this.listProduit[i].quantite);
-    this.listproduitsocket.push(this.listProduit[i].id_produit);
-  }
-
-  this.geolocalisationservice.getLocationService().then(res => {
-
-    this.http.post('api/checkout/placeorder', {
-      id_user: this.idd,
-      lat: res.lat,
-      lng: res.lng,
-      totaleprix  : this.totalePrixPanier,
-      Produits: this.listproduits,
-      couponn : this.inputcoupoun.nativeElement.value,
-      paymentMethod: this.cash
-    }
-    ).subscribe(
+    this.SocketIOServiceService.listen('produithorsStock').subscribe(
       (data: any) => {
+        this.toastr.error('Le produit ' + data.xx.nom + ' est hors stock');
         console.log(data);
+      }
+    );
+  }
 
-        this.toastr.success('Votre commande a été bien enregistrée');
-        this.SocketIOServiceService.emit('produits', this.listproduitsocket);
-        this.listproduits = [];
+  PlaceOrder() {
+    console.log('***********************');
+    console.log(this.inputcoupoun.nativeElement.value);
 
-        this.router.navigate(['/order'+ '/' + data.commandeuser.id]);
-
-
+    if (this.listProduit.length == 0) {
+      this.toastr.error('Votre panier est vide');
+    } else {
+      for (let i = 0; i < this.listProduit.length; i++) {
+        this.listproduits.push(
+          this.listProduit[i].nom_produit + '*' + this.listProduit[i].quantite
+        );
+        this.listproduitsocket.push(this.listProduit[i].id_produit);
       }
 
+      this.geolocalisationservice
+        .getLocationService()
+        .then((res) => {
+          this.http
+            .post('api/checkout/placeorder', {
+              id_user: this.idd,
+              lat: res.lat,
+              lng: res.lng,
+              totaleprix: this.totalePrixPanier,
+              Produits: this.listproduits,
+              couponn: this.inputcoupoun.nativeElement.value,
+              paymentMethod: this.cash,
+            })
+            .subscribe(
+              (data: any) => {
+                console.log(data);
 
+                this.toastr.success('Votre commande a été bien enregistrée');
+                this.SocketIOServiceService.emit(
+                  'produits',
+                  this.listproduitsocket
+                );
+                this.listproduits = [];
 
+                this.router.navigate(['/order' + '/' + data.commandeuser.id]);
 
-    );
+                this.SocketIOServiceService.emit(
+                  'commande',
+                  data.commandeuser.id_user
+                );
+                this.SocketIOServiceService.emit(
+                  'idusercountprdouit',
+                  data.commandeuser.id_user
+                );
+              },
 
-    }).catch(err =>
-      console.log(err))
-
-}
-
-
+              (err) => {
+                this.toastr.error('Une erreur est survenue');
+              }
+            );
+        })
+        .catch((err) => console.log(err));
+    }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   makePayment(amount: any) {
     if (this.listProduit.length == 0) {
       this.toastr.error('Votre panier est vide');
     } else {
-
-
-    const paymentHandler = (<any>window).StripeCheckout.configure({
-      key: 'pk_test_51LeymeKxK5TNzzT1OfYRh4tZp1fQDwvadEFObYyRLnPwBa3Jw3r51HSstR3wyziuVUTOsaLBJSMKP1w8OFsza8Ej009sUbkWS6',
-      locale: 'auto',
-      token: function (stripeToken: any) {
-        console.log(stripeToken);
-        alert('Stripe token generated!');
-
-
-      },
-
-    });
-    paymentHandler.open({
-      name: 'Positronx',
-      description: '3 widgets',
-      amount: amount * 100,
-    });
-  }
-  for (let i = 0; i < this.listProduit.length; i++) {
-    this.listproduits.push(this.listProduit[i].nom_produit +'*'+ this.listProduit[i].quantite);
-  }
-
-  this.geolocalisationservice.getLocationService().then(res => {
-
-    this.http.post('api/checkout/placeorder', {
-      id_user: this.idd,
-      lat: res.lat,
-      lng: res.lng,
-      totaleprix  : this.totalePrixPanier,
-      Produits: this.listproduits,
-      couponn : this.inputcoupoun.nativeElement.value,
-      paymentMethod: this.stripe
-    }
-    ).subscribe(
-      (data: any) => {
-        this.toastr.success('Votre commande a été bien enregistrée');
-        this.listproduits = [];
+      const paymentHandler = (<any>window).StripeCheckout.configure({
+        key: 'pk_test_51LeymeKxK5TNzzT1OfYRh4tZp1fQDwvadEFObYyRLnPwBa3Jw3r51HSstR3wyziuVUTOsaLBJSMKP1w8OFsza8Ej009sUbkWS6',
+        locale: 'auto',
+        token: function (stripeToken: any) {
+          console.log(stripeToken);
+          alert('Stripe token generated!');
+        },
+      });
+      paymentHandler.open({
+        name: 'Positronx',
+        description: '3 widgets',
+        amount: amount * 100,
+      });
+      for (let i = 0; i < this.listProduit.length; i++) {
+        this.listproduits.push(
+          this.listProduit[i].nom_produit + '*' + this.listProduit[i].quantite
+        );
       }
 
-    );
-
-    }).catch(err =>
-      console.log(err))
+      this.geolocalisationservice
+        .getLocationService()
+        .then((res) => {
+          this.http
+            .post('api/checkout/placeorder', {
+              id_user: this.idd,
+              lat: res.lat,
+              lng: res.lng,
+              totaleprix: this.totalePrixPanier,
+              Produits: this.listproduits,
+              couponn: this.inputcoupoun.nativeElement.value,
+              paymentMethod: this.stripe,
+            })
+            .subscribe((data: any) => {
+              this.toastr.success('Votre commande a été bien enregistrée');
+              this.listproduits = [];
+              this.SocketIOServiceService.emit(
+                'commande',
+                data.commandeuser.id_user
+              );
+              this.SocketIOServiceService.emit(
+                'idusercountprdouit',
+                data.commandeuser.id_user
+              );
+            });
+        })
+        .catch((err) => console.log(err));
+    }
   }
   invokeStripe() {
     if (!window.document.getElementById('stripe-script')) {

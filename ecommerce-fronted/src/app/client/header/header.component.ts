@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
   idUser: number = 0;
   ListCountPanier: any;
   totalePrixPanier: any;
-  tt : number = 0;
+  tt: number = 0;
 
   constructor(
     private router: Router,
@@ -33,20 +33,21 @@ export class HeaderComponent implements OnInit {
     private toastr: ToastrService,
     private http: HttpClient,
     private currentRoute: ActivatedRoute,
-    private SocketIOServiceService : SocketIOServiceService,
-  ) {
-
-
-  }
-
-
+    private SocketIOServiceService: SocketIOServiceService
+  ) {}
 
   ngOnInit(): void {
+    this.SocketIOServiceService.listen('total').subscribe((data: any) => {
+      this.totalePrixPanier = data.total;
+    });
 
-    this.SocketIOServiceService.listen('count').subscribe((data:any)=>{
-     console.log('**********************'+data.count);
-     this.ListCountPanier = data.count;
-    })
+    this.SocketIOServiceService.listen('panier').subscribe((data: any) => {
+      this.ListPanier = data.panier;
+    });
+
+    this.SocketIOServiceService.listen('count').subscribe((data: any) => {
+      this.ListCountPanier = data.count;
+    });
     this.showallCat();
 
     Emitters.authEmitter.subscribe((auth: boolean) => {
@@ -65,18 +66,14 @@ export class HeaderComponent implements OnInit {
             .get('api/panier/afficherPanierparId/' + id)
             .subscribe((data: any) => {
               this.ListPanier = data;
-
-
+              console.log(this.ListPanier);
             }),
             this.http
               .get('api/panier/countCloneProduit/' + id)
               .subscribe((data: any) => {
                 this.ListCountPanier = data;
-         
-                
-                
-                console.log(this.ListCountPanier);
 
+                console.log(this.ListCountPanier);
               }),
             this.http.get('api/panier/totaleprixpanier/' + id).subscribe(
               (data: any) => {
@@ -110,6 +107,7 @@ export class HeaderComponent implements OnInit {
           .subscribe((data: any) => {
             this.toastr.success('Produit supprimé avec succès');
             this.ngOnInit();
+            this.SocketIOServiceService.emit('idusercountprdouit', id);
           });
       });
   }

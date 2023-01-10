@@ -124,7 +124,7 @@ const ajouterPanier = async (req, res, next) => {
       },
     });
     if (produitdejaexisetedanspanier) {
-      return res.status(400).send("produit deja existé dans panier");
+      return res.status(401).send("produit deja existé dans panier");
     }
     const findcategoriebyid = await categorie.findOne({
       where: {

@@ -102,34 +102,7 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  getProduit(idprdouits: number) {
-    this.http
-      .get('api/totale/afficheRate' + '/' + idprdouits)
-      .subscribe((data: any) => {
-        console.log('rabie');
 
-        for (let i = 0; i < data.length; i++) {
-          this.x += parseInt(data[i].noter) / data.length;
-        }
-
-        this.datasets = [
-          {
-            label: 'Traffic',
-            data: [this.x],
-            backgroundColor: [
-              'rgba(63, 81, 181, 0.5)',
-              'rgba(77, 182, 172, 0.5)',
-              'rgba(66, 133, 244, 0.5)',
-              'rgba(156, 39, 176, 0.5)',
-              'rgba(233, 30, 99, 0.5)',
-              'rgba(66, 73, 244, 0.4)',
-              'rgba(66, 133, 244, 0.2)',
-            ],
-          },
-        ];
-        this.labels = [data[1].produit.nom];
-      });
-  }
 
   ngOnInit( ) {
 

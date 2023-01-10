@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Emitters } from 'src/app/emitters/emitter';
 import { filter } from 'rxjs';
-
+import { SocketIOServiceService } from 'src/app/Service/SocketIOService/socket-ioservice.service';
 const SCRIPT_PATH_LIST = [
   'assets/client/js/jquery-3.3.1.min.js',
 
@@ -67,7 +67,8 @@ export class SinglepageProductComponent implements OnInit {
     private toastr: ToastrService,
     private http: HttpClient,
     private currentRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private SocketIOServiceService: SocketIOServiceService
   ) {
     this.route = this._router.url;
   }
@@ -182,14 +183,35 @@ export class SinglepageProductComponent implements OnInit {
             }
           );
           this.ngOnInit();
+          this.SocketIOServiceService.emit('idusercountprdouit', id);
         },
-        (err: any) => {
-          this.toastr.error('Produit existe déjà dans le panier', 'Erreur', {
-            timeOut: 3000,
-            progressBar: true,
-            progressAnimation: 'increasing',
-            positionClass: 'toast-top-right',
-          });
+        (error: any) => {
+          if (error.status == 401) {
+            this.toastr.error('Produit déjà dans le panier', 'Erreur', {
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+              positionClass: 'toast-top-right',
+            });
+
+          }else if (error.status == 400) {
+            this.toastr.error('Produit hors stock', 'Erreur', {
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+              positionClass: 'toast-top-right',
+            });
+
+          }
+          else{
+            this.toastr.warning('Serveur indisponible', 'Erreur', {
+              timeOut: 3000,
+              progressBar: true,
+              progressAnimation: 'increasing',
+              positionClass: 'toast-top-right',
+            });
+          }
+
         }
       );
   }

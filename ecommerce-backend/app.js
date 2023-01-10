@@ -29,7 +29,9 @@ const coupon = require("./routes/coupon");
 const avis = require("./routes/avis");
 const cors = require("cors");
 const { email } = require("./controllers/emaildeletePanier/email");
-const { emaildeletecoupoun } = require("./controllers/emaildeletePanier/emaildeletecoupoun");
+const {
+  emaildeletecoupoun,
+} = require("./controllers/emaildeletePanier/emaildeletecoupoun");
 const { count } = require("console");
 const app = express();
 app.use(bodyParser.json());
@@ -81,15 +83,14 @@ app.use("/clientAdmin", clientAdmin); // http://localhost:8080/clientAdmin
 app.use("/ContactAdmin", contactAdmin); // http://localhost:8080/affichercontact")
 app.use("/commandeAdmin", commandeAdmin); // http://localhost:8080/commandeAdmin
 app.use("/paiment", PaimentClient);
-app.use('/checkout', checkout);
+app.use("/checkout", checkout);
 app.use("/ContactClient", ContactClient); // http://localhost:8080/ContactClient/ajoutercontact
-app.use('/totale', Totale)
-app.use('/coupon', coupon)
+app.use("/totale", Totale);
+app.use("/coupon", coupon);
 app.use("/like", likeRouter); // http://localhost:8080/like
 app.use("/noterproduit", noterProduitRouter);
 app.use("/avis", avis);
 // http://localhost:8080/paiment
-
 
 // const someDate = new Date('2022-12-07 00:49:00');
 // shedule.scheduleJob(someDate, function(){
@@ -120,11 +121,8 @@ const myDailyTask = async () => {
           id_user: user.id,
         },
       });
-
     }
   });
-
-
 };
 const deletecoupon = async () => {
   // how recupere user by data and delete this user
@@ -141,15 +139,12 @@ const deletecoupon = async () => {
           id: coupon.id_user,
         },
       });
-      emaildeletecoupoun(findUser.email, coupon.date_expiration,coupon.prix )
+      emaildeletecoupoun(findUser.email, coupon.date_expiration, coupon.prix);
       await db.coupon.destroy({
         where: {
           id: coupon.id,
         },
       });
-    
-    
-     
     }
   });
 };
@@ -157,26 +152,19 @@ const deletecouponbyetat = async () => {
   // how recupere user by data and delete this user
   const coupon = await db.coupon.findAll();
   coupon.forEach(async (coupon) => {
-  
     // console.log(panierexpererr.date_expiration)
     // console.log(dateFormated)
-    if (coupon.etat != 'en cours') {
-  
+    if (coupon.etat != "en cours") {
       await db.coupon.destroy({
         where: {
           id: coupon.id,
         },
       });
-    
-    
-     
     }
   });
 };
 
-
 const deletepanier = async () => {
-
   // how recupere user by data and delete this user
   const panierexpererr = await db.expererpanier.findAll();
   panierexpererr.forEach(async (panierexpererr) => {
@@ -185,25 +173,20 @@ const deletepanier = async () => {
     var dateFormated = someDate.toISOString().substr(0, 10);
     // console.log(panierexpererr.date_expiration)
     // console.log(dateFormated)
-    if (panierexpererr.date_expiration == dateFormated || panierexpererr.date_expiration < dateFormated) {
+    if (
+      panierexpererr.date_expiration == dateFormated ||
+      panierexpererr.date_expiration < dateFormated
+    ) {
       const findUser = await db.user.findOne({
-
         where: {
           id: panierexpererr.id_user,
         },
       });
       const findPanier = await db.panier.findOne({
-
         where: {
           id_user: panierexpererr.id_user,
         },
       });
-
-
-
-
-
-
 
       await db.panier.destroy({
         where: {
@@ -215,14 +198,10 @@ const deletepanier = async () => {
           id_user: panierexpererr.id_user,
         },
       });
-      email(findUser.nom, findUser.email)
+      email(findUser.nom, findUser.email);
     }
   });
-
-
 };
-
-
 
 const deleteproduitPromotion = async () => {
   // how recupere user by data and delete this user
@@ -249,28 +228,25 @@ const deleteproduitPromotion = async () => {
   });
 };
 
-
 const deleteexpererpanier = async () => {
-const checkiduserpanierifexist = await db.expererpanier.findAll();
-const checkiduserexperepanierifexist = await db.expererpanier.findAll();
-// if iduser n'existe pas dans panier alors on supprime iduser dans expererpanier
-checkiduserpanierifexist.forEach(async (checkiduserpanierifexist) => {
-  const findpanier = await db.panier.findOne({
-    where: {
-      id_user: checkiduserpanierifexist.id_user,
-    },
-  });
-  if (findpanier == null) {
-    await db.expererpanier.destroy({
+  const checkiduserpanierifexist = await db.expererpanier.findAll();
+  const checkiduserexperepanierifexist = await db.expererpanier.findAll();
+  // if iduser n'existe pas dans panier alors on supprime iduser dans expererpanier
+  checkiduserpanierifexist.forEach(async (checkiduserpanierifexist) => {
+    const findpanier = await db.panier.findOne({
       where: {
         id_user: checkiduserpanierifexist.id_user,
       },
     });
-  }
-});
-}
-
-
+    if (findpanier == null) {
+      await db.expererpanier.destroy({
+        where: {
+          id_user: checkiduserpanierifexist.id_user,
+        },
+      });
+    }
+  });
+};
 
 // io.on("connection",function(socket){
 //   console.log("a user connected");
@@ -299,7 +275,6 @@ server.listen(3000, function () {
 });
 
 shedule.scheduleJob("*/2 * * * * * ", () => {
-
   myDailyTask();
   deleteproduitPromotion();
   deletepanier();
@@ -307,153 +282,178 @@ shedule.scheduleJob("*/2 * * * * * ", () => {
   deletecoupon();
   deletecouponbyetat();
 });
-const io = require('socket.io')(server);
+const io = require("socket.io")(server);
 let numConnectedClients = 0;
-io.on('connection', (socket) => {
-  console.log('a user connected');
+io.on("connection", (socket) => {
+  console.log("a user connected");
 
   numConnectedClients++;
   console.log(numConnectedClients);
-  socket.broadcast.emit('active-clients-changed', { numConnectedClients : numConnectedClients , date : new Date() });
-  socket.emit('active-clients-changed', { numConnectedClients : numConnectedClients , date : new Date() });
-
-  socket.on('xx', (data) => {
-    
-    socket.emit('active-clients-changed', { numConnectedClients : numConnectedClients , date : new Date() });
-   
-
-  })
-
-
-  socket.on('message', (aa) => {
-    console .log(aa)
-    db.user.findOne({ where: { id : aa } }).then(user => {
-    if(user.banier == 'true'){
-      console.log('user ban')
-      socket.broadcast.emit('ban', { userId: user.id });
-      
-
-    }else{
-       
-      console.log('user not ban')
-    }
-  })
-
-
-})
-
-
-
-
-
-
-
-  socket.on('produits', (data ) => {
-  db.produit.findAll().then(produit => {
-    produit.forEach(produit => {
-      if(produit.quantite == 0){
-        socket.broadcast.emit('produit', { produit: produit });
-      }
-    })
-  })
+  socket.broadcast.emit("active-clients-changed", {
+    numConnectedClients: numConnectedClients,
+    date: new Date(),
   });
-  socket.on('idusercountprdouit', (data) => {
-   
-    db.panier.findOne({ where: { id_user: data } }).then(panier => {
-    
-        db.panier.findOne({ where: { id_user: data } }).then(
-          panier => {
-            db.panier.findAll({
-              where: { id_user: data },
+  socket.emit("active-clients-changed", {
+    numConnectedClients: numConnectedClients,
+    date: new Date(),
+  });
+
+  socket.on("xx", (data) => {
+    socket.emit("active-clients-changed", {
+      numConnectedClients: numConnectedClients,
+      date: new Date(),
+    });
+  });
+
+  socket.on("message", (aa) => {
+    console.log(aa);
+    db.user.findOne({ where: { id: aa } }).then((user) => {
+      if (user.banier == "true") {
+        console.log("user ban");
+        socket.broadcast.emit("ban", { userId: user.id });
+      } else {
+        console.log("user not ban");
+      }
+    });
+  });
+
+  socket.on("produits", (data) => {
+    db.produit.findAll().then((produit) => {
+      produit.forEach((produit) => {
+        if (produit.quantite == 0) {
+          socket.broadcast.emit("produit", { produit: produit });
+        }
+      });
+    });
+  });
+  socket.on("idusercountprdouit", (data) => {
+    db.panier.findOne({ where: { id_user: data } }).then((panier) => {
+      db.panier.findOne({ where: { id_user: data } }).then((panier) => {
+        db.panier
+          .findAll({
+            where: { id_user: data },
+            include: [
+              {
+                model: db.produit,
+                as: "produit",
+              },
+            ],
+          })
+          .then((panier) => {
+            var count = 0;
+            let total = 0;
+            panier.forEach((panier) => {
+              count += panier.quantite;
+              total += panier.quantite * panier.newprix;
+            });
+
+            socket.emit("count", { count: count });
+            socket.emit("panier", { panier: panier });
+            socket.emit("total", { total: total });
+          });
+      });
+    });
+  });
+
+  socket.on("singleavis", (data) => {
+    console.log(data.id);
+    console.log(data.idUser);
+    db.avis
+      .findOne({ where: { id_user: data.idUser, id: data.id } })
+      .then((avis) => {
+        if (avis) {
+          socket.broadcast.emit("avis", {
+            avis: avis.message,
+            idUser: data.idUser,
+          });
+          console.log(avis);
+
+          db.avis
+            .findAll({
               include: [
                 {
-                  model: db.produit,
-                  as: "produit",
+                  model: user,
+                  attributes: ["nom"],
+                },
+                {
+                  model: user,
+                  attributes: ["image"],
+                },
+                {
+                  model: user,
+                  attributes: ["id"],
                 },
               ],
-            }).then(panier => {
-              var count = 0;
-              panier.forEach(panier => {
-                count += panier.quantite;
-              });
-              socket.emit('count', { count: count });
+            })
+            .then((avis) => {
+              socket.broadcast.emit("listavis", avis);
+              console.log(avis);
             });
-          }
-        );
-      }
-    );
-  });
-      
- socket.on('singleavis', (data) => {
-
-    console.log(data.id)
-    console.log(data.idUser)
-    db.avis.findOne({ where: { id_user: data.idUser, id: data.id } }).then(avis => {
-      if(avis){
-        socket.broadcast.emit('avis', { avis: avis.message , idUser: data.idUser  });
-        console.log(avis)
-
-        db.avis.findAll({
-          include: [
-            {
-              model: user,
-              attributes: ["nom"],
-            },
-            {
-              model: user,
-              attributes: ["image"],
-            },
-            {
-              model: user,
-              attributes: ["id"],
-            }
-          ],
-        }).then(avis => {
-        
-            socket.broadcast.emit('listavis', avis);
-            console.log(avis)
-          
         }
-        )
+      });
+  });
 
-      }
-       
-    })
- })
- 
+  socket.on("commande", (data) => {
+    console.log(data);
+    db.commande
+      .findOne({
+        where: { id_user: data },
+        include: [
+          {
+            model: db.user,
+          
+            attributes: ["nom"],
+          },
+        ],
+        
+      })
+      .then((commande) => {
+        socket.broadcast.emit("commandeAdmin", commande);
+     
+      });
+  });
+  socket.on("commandeClient", (data) => {
+    console.log('-----'+data);
+    db.produit.findOne({where:{id:data}}).then(produit=>{
+     
+         if (produit.quantite == 0) {
+           socket.emit("produithorsStock", { xx: produit });
+   console.log(produit);
+         }
+        
+     
+     
+     });
+    });
 
-    
-
-  // if product is not in stock send notification to admin 
-
-// setInterval(() => {
-//   db.produit.findAll().then(produit => {
-//     produit.forEach(produit => {
-//       if(produit.quantite == 0){
-//         socket.broadcast.emit('produit', { produit: produit });
-//       }
-//     })
-//   })
-// }, 1000);
 
 
+  // if product is not in stock send notification to admin
 
+  // setInterval(() => {
+  //   db.produit.findAll().then(produit => {
+  //     produit.forEach(produit => {
+  //       if(produit.quantite == 0){
+  //         socket.broadcast.emit('produit', { produit: produit });
+  //       }
+  //     })
+  //   })
+  // }, 1000);
 
-  
-    
-
-
-  
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
     numConnectedClients--;
     console.log(numConnectedClients);
-    socket.broadcast.emit('active-clients-changed', { numConnectedClients : numConnectedClients , date : new Date() });
-    socket.emit('active-clients-changed', { numConnectedClients : numConnectedClients , date : new Date() });
+    socket.broadcast.emit("active-clients-changed", {
+      numConnectedClients: numConnectedClients,
+      date: new Date(),
+    });
+    socket.emit("active-clients-changed", {
+      numConnectedClients: numConnectedClients,
+      date: new Date(),
+    });
   });
-  // how recupere user if ban or not 
-
-
-  
+  // how recupere user if ban or not
 });
- 
+
+

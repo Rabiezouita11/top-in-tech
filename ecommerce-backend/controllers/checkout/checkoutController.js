@@ -11,9 +11,11 @@ const placeorder = async (req, res, next) => {
       const produits = await produit.findOne({
         where: { id: panieruser.id_produit },
       });
+
+
       const quantite = produits.quantite - panieruser.quantite;
-      console.log(quantite);
-      await produits.update({ quantite: quantite });
+    
+     return await produits.update({ quantite: quantite });
   
     });
 
