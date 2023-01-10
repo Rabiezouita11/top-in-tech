@@ -45,7 +45,12 @@ export class CheckoutComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
+    this.SocketIOServiceService.listen('produithorsStock').subscribe(
+      (data: any) => {
+        this.toastr.error('Le produit ' + data.xx.nom + ' est hors stock');
+        console.log(data);
+      }
+    );
     try {
       this.http
         .get('api/auth/getUser', { withCredentials: true })
@@ -86,12 +91,6 @@ export class CheckoutComponent implements OnInit {
     }
 
     this.invokeStripe();
-    this.SocketIOServiceService.listen('produithorsStock').subscribe(
-      (data: any) => {
-        this.toastr.error('Le produit ' + data.xx.nom + ' est hors stock');
-        console.log(data);
-      }
-    );
   }
 
   PlaceOrder() {
