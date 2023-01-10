@@ -33,6 +33,7 @@ const {
   emaildeletecoupoun,
 } = require("./controllers/emaildeletePanier/emaildeletecoupoun");
 const { count } = require("console");
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -389,9 +390,52 @@ io.on("connection", (socket) => {
               socket.broadcast.emit("listavis", avis);
               console.log(avis);
             });
-        }
+
+
+          }
+     
       });
   });
+
+      
+   
+ 
+ socket.on('singleavis', (data) => {
+
+
+    db.avis.findOne({ where: { id_user: data.idUser, id: data.id } }).then(avis => {
+      if(avis){
+        socket.broadcast.emit('avis', { avis: avis.message , idUser: data.idUser  });
+   
+
+        db.avis.findAll({
+          include: [
+            {
+              model: user,
+              attributes: ["nom"],
+            },
+            {
+              model: user,
+              attributes: ["image"],
+            },
+            {
+              model: user,
+              attributes: ["id"],
+            }
+          ],
+        }).then(avis => {
+        
+            socket.broadcast.emit('listavis', avis);
+            console.log(avis)
+          
+
+        }
+      
+      );
+      }
+
+  });
+
 
   socket.on("commande", (data) => {
     console.log(data);
@@ -426,6 +470,34 @@ io.on("connection", (socket) => {
      });
     });
 
+      }
+       
+    );
+
+
+
+
+//  socket.on('chat', (message) => {
+//   const response =  nltk.generateResponse(message);
+//   socket.emit('chat', response);
+//   console.log(response)
+// });
+
+
+
+  // if product is not in stock send notification to admin 
+
+// setInterval(() => {
+//   db.produit.findAll().then(produit => {
+//     produit.forEach(produit => {
+//       if(produit.quantite == 0){
+//         socket.broadcast.emit('produit', { produit: produit });
+//       }
+//     })
+//   })
+// }, 1000);
+
+
 
 
   // if product is not in stock send notification to admin
@@ -454,6 +526,7 @@ io.on("connection", (socket) => {
     });
   });
   // how recupere user if ban or not
-});
 
+
+});
 
