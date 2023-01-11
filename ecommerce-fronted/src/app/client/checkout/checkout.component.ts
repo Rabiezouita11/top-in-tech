@@ -45,7 +45,13 @@ export class CheckoutComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  
+this.SocketIOServiceService.listen('listproduitchechkout').subscribe((data:any)=>{
+  console.log('listproduitchechkoutlistproduitchechkoutlistproduitchechkoutlistproduitchechkout');
+  console.log(data);
+  this.listProduit =data;
+})
+
+
     try {
       this.http
         .get('api/auth/getUser', { withCredentials: true })
@@ -58,21 +64,21 @@ export class CheckoutComponent implements OnInit {
 
           const id = user.id;
           this.idd = id;
-
+        
           this.http
             .get('api/panier/afficherPanierparId/' + id)
             .subscribe((data: any) => {
-             
+              this.SocketIOServiceService.emit('listproduitClient', id);
               this.listProduit = data;
               for (let i = 0; i < this.listProduit.length; i++) {
-               
+
                 this.SocketIOServiceService.emit(
                   'commandeClient',
                   this.listProduit[i].id_produit
                 );
-               
+
               }
-       
+
               console.log(this.listProduit);
             }),
             this.http
@@ -85,13 +91,15 @@ export class CheckoutComponent implements OnInit {
               .subscribe((data: any) => {
                 this.listcoupon = data;
               });
+              this.SocketIOServiceService.emit('idusercountprdouit', id);
         });
+        
     } catch (error) {
       this.authenticated = false;
     }
 
     this.invokeStripe();
-   
+
   }
 
   PlaceOrder() {

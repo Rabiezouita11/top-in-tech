@@ -390,16 +390,9 @@ io.on("connection", (socket) => {
               socket.broadcast.emit("listavis", avis);
               console.log(avis);
             });
-
-
-          }
-     
+        }
       });
   });
-
-      
-   
- 
 
   socket.on("commande", (data) => {
     console.log(data);
@@ -409,66 +402,65 @@ io.on("connection", (socket) => {
         include: [
           {
             model: db.user,
-          
+
             attributes: ["nom"],
           },
         ],
-        
       })
       .then((commande) => {
         socket.broadcast.emit("commandeAdmin", commande);
-     
       });
   });
   socket.on("commandeClient", (data) => {
-    console.log('-----'+data);
-    db.produit.findOne({where:{id:data}}).then(produit=>{
-     
-         if (produit.quantite == 0) {
-           socket.emit("produithorsStock", { xx: produit });
-   console.log(produit);
-   db.panier.destroy({where:{id_produit:produit.id}}).then(panier=>{
-      console.log(panier);
-
-    })
-    
-         }
-        
-     
-     
-     });
+    console.log("-----" + data);
+    db.produit.findOne({ where: { id: data } }).then((produit) => {
+      if (produit.quantite == 0) {
+        socket.emit("produithorsStock", { xx: produit });
+        console.log(produit);
+        db.panier
+          .destroy({ where: { id_produit: produit.id } })
+          .then((panier) => {
+            console.log(panier);
+          });
+          
+      }
     });
+  });
 
-     
- 
-       
-    
+  socket.on("listproduitClient", (data) => {
+    db.panier
+      .findAll({
+        where: { id_user: data },
+        include: [
+          {
+            model: db.produit,
+            attributes: ["image", "nom", "id"],
+          },
+        ],
+      })
+      .then((panier) => {
+        console.log(panier);
+        socket.emit("listproduitchechkout", panier);
+      });
+  });
 
+  //  socket.on('chat', (message) => {
+  //   const response =  nltk.generateResponse(message);
+  //   socket.emit('chat', response);
+  //   console.log(response)
+  // });
 
+  // if product is not in stock send notification to admin
 
-
-//  socket.on('chat', (message) => {
-//   const response =  nltk.generateResponse(message);
-//   socket.emit('chat', response);
-//   console.log(response)
-// });
-
-
-
-  // if product is not in stock send notification to admin 
-
-// setInterval(() => {
-//   db.produit.findAll().then(produit => {
-//     produit.forEach(produit => {
-//       if(produit.quantite == 0){
-//         socket.broadcast.emit('produit', { produit: produit });
-//       }
-//     })
-//   })
-// }, 1000);
-
-
-
+  // setInterval(() => {
+  //   db.produit.findAll().then(produit => {
+  //     produit.forEach(produit => {
+  //       if(produit.quantite == 0){
+  //         socket.broadcast.emit('produit', { produit: produit });
+  //       }
+  //     })
+  //   })
+  // }, 1000);
 
   // if product is not in stock send notification to admin
 
@@ -496,7 +488,4 @@ io.on("connection", (socket) => {
     });
   });
   // how recupere user if ban or not
-
-
 });
-

@@ -49,13 +49,13 @@ export class ComponentClientComponent implements OnInit {
     this.SocketIOServiceService.listen('produithorsStock').subscribe(
       (data: any) => {
         this.toastr.error('Le produit ' + data.xx.nom + ' est hors stock', 'Error', {
-          timeOut: 7000,
+          timeOut: 10000,
           progressBar: true,
           progressAnimation: 'increasing',
           positionClass: 'toast-top-right',
         });
 
-      
+
         console.log(data);
       }
     );
@@ -86,7 +86,7 @@ this.SocketIOServiceService.listen('avis').subscribe((data: any) => {
     }
   });
 
-      
+
 
 
     this.SocketIOServiceService.listen('ban').subscribe((data: any) => {
