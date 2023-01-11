@@ -412,7 +412,7 @@ io.on("connection", (socket) => {
       });
   });
   socket.on("commandeClient", (data) => {
-    console.log("-----" + data);
+
     db.produit.findOne({ where: { id: data } }).then((produit) => {
       if (produit.quantite == 0) {
         socket.emit("produithorsStock", { xx: produit });
@@ -420,7 +420,7 @@ io.on("connection", (socket) => {
         db.panier
           .destroy({ where: { id_produit: produit.id } })
           .then((panier) => {
-            console.log(panier);
+       
           });
           
       }
@@ -439,7 +439,7 @@ io.on("connection", (socket) => {
         ],
       })
       .then((panier) => {
-        console.log(panier);
+  
         socket.emit("listproduitchechkout", panier);
       });
   });

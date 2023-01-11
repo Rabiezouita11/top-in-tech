@@ -45,60 +45,86 @@ export class CheckoutComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-this.SocketIOServiceService.listen('listproduitchechkout').subscribe((data:any)=>{
-  console.log('listproduitchechkoutlistproduitchechkoutlistproduitchechkoutlistproduitchechkout');
-  console.log(data);
-  this.listProduit =data;
-})
 
 
-    try {
-      this.http
-        .get('api/auth/getUser', { withCredentials: true })
-        .subscribe((user: any) => {
-          this.authenticated = true;
-          this.nom = user.nom;
-          this.prenom = user.prenom;
-          this.email = user.email;
-          this.cin = user.cin;
+  this.SocketIOServiceService.listen('listproduitchechkout').subscribe((data:any)=>{
+    console.log('listproduitchechkoutlistproduitchechkoutlistproduitchechkoutlistproduitchechkout');
+    console.log(data);
+    this.listProduit =data;
+  })
 
-          const id = user.id;
-          this.idd = id;
+
+  try {
+    this.http
+      .get('api/auth/getUser', { withCredentials: true })
+      .subscribe((user: any) => {
+        this.authenticated = true;
+        this.nom = user.nom;
+        this.prenom = user.prenom;
+        this.email = user.email;
+        this.cin = user.cin;
+
+        const id = user.id;
+        this.idd = id;
+      
+        this.http
+          .get('api/panier/afficherPanierparId/' + id)
+          .subscribe((data: any) => {
+          
+            this.SocketIOServiceService.emit('listproduitClient', id);
+            this.listProduit=data;
+         
+            for (let i = 0; i < this.listProduit.length; i++) {
+
+              this.SocketIOServiceService.emit(
+                'commandeClient',
+                this.listProduit[i].id_produit
+              );
+
+            }
         
+
+    
+
+          })
+      ,
+          
           this.http
             .get('api/panier/afficherPanierparId/' + id)
             .subscribe((data: any) => {
+
               this.SocketIOServiceService.emit('listproduitClient', id);
-              this.listProduit = data;
-              for (let i = 0; i < this.listProduit.length; i++) {
+              this.listProduit = [];
+              this.listProduit=data;
 
-                this.SocketIOServiceService.emit(
-                  'commandeClient',
-                  this.listProduit[i].id_produit
-                );
 
-              }
 
-              console.log(this.listProduit);
+
+
+
+            }),this.http
+            .get('api/panier/totaleprixpanier/' + id)
+            .subscribe((data: any) => {
+              this.totalePrixPanier = data;
             }),
-            this.http
-              .get('api/panier/totaleprixpanier/' + id)
-              .subscribe((data: any) => {
-                this.totalePrixPanier = data;
-              }),
-            this.http
-              .get('api/coupon/affichecouponbyiduser/' + id)
-              .subscribe((data: any) => {
-                this.listcoupon = data;
-              });
-              this.SocketIOServiceService.emit('idusercountprdouit', id);
-        });
-        
-    } catch (error) {
-      this.authenticated = false;
-    }
+          this.http
+            .get('api/coupon/affichecouponbyiduser/' + id)
+            .subscribe((data: any) => {
+              this.listcoupon = data;
+            });
+            this.SocketIOServiceService.emit('idusercountprdouit', id);
+      });
 
-    this.invokeStripe();
+  } catch (error) {
+    this.authenticated = false;
+  }
+
+  this.invokeStripe();
+
+
+
+
+  
 
   }
 
@@ -109,6 +135,8 @@ this.SocketIOServiceService.listen('listproduitchechkout').subscribe((data:any)=
     if (this.listProduit.length == 0) {
       this.toastr.error('Votre panier est vide');
     } else {
+
+
       for (let i = 0; i < this.listProduit.length; i++) {
         this.listproduits.push(
           this.listProduit[i].nom_produit + '*' + this.listProduit[i].quantite

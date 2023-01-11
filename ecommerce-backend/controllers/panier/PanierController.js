@@ -66,7 +66,9 @@ const afficherPanierparId = async (req, res, next) => {
       ],
     });
     if (panierr) {
+       console.log(panierr);
       return res.status(200).json(panierr);
+     
     }
     if (!panierr) {
       return res.status(404).send("panier not found");
