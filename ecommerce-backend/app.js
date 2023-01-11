@@ -400,42 +400,6 @@ io.on("connection", (socket) => {
       
    
  
- socket.on('singleavis', (data) => {
-
-
-    db.avis.findOne({ where: { id_user: data.idUser, id: data.id } }).then(avis => {
-      if(avis){
-        socket.broadcast.emit('avis', { avis: avis.message , idUser: data.idUser  });
-   
-
-        db.avis.findAll({
-          include: [
-            {
-              model: user,
-              attributes: ["nom"],
-            },
-            {
-              model: user,
-              attributes: ["image"],
-            },
-            {
-              model: user,
-              attributes: ["id"],
-            }
-          ],
-        }).then(avis => {
-        
-            socket.broadcast.emit('listavis', avis);
-            console.log(avis)
-          
-
-        }
-      
-      );
-      }
-
-  });
-
 
   socket.on("commande", (data) => {
     console.log(data);
@@ -463,6 +427,11 @@ io.on("connection", (socket) => {
          if (produit.quantite == 0) {
            socket.emit("produithorsStock", { xx: produit });
    console.log(produit);
+   db.panier.destroy({where:{id_produit:produit.id}}).then(panier=>{
+      console.log(panier);
+
+    })
+    
          }
         
      
@@ -470,9 +439,10 @@ io.on("connection", (socket) => {
      });
     });
 
-      }
+     
+ 
        
-    );
+    
 
 
 

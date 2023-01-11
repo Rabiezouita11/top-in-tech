@@ -42,15 +42,10 @@ export class CheckoutComponent implements OnInit {
     private toastr: ToastrService,
     private geolocalisationservice: GeoLocalisationServiceService,
     private SocketIOServiceService: SocketIOServiceService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.SocketIOServiceService.listen('produithorsStock').subscribe(
-      (data: any) => {
-        this.toastr.error('Le produit ' + data.xx.nom + ' est hors stock');
-        console.log(data);
-      }
-    );
+  
     try {
       this.http
         .get('api/auth/getUser', { withCredentials: true })
@@ -67,13 +62,18 @@ export class CheckoutComponent implements OnInit {
           this.http
             .get('api/panier/afficherPanierparId/' + id)
             .subscribe((data: any) => {
+             
               this.listProduit = data;
               for (let i = 0; i < this.listProduit.length; i++) {
+               
                 this.SocketIOServiceService.emit(
                   'commandeClient',
                   this.listProduit[i].id_produit
                 );
+               
               }
+       
+              console.log(this.listProduit);
             }),
             this.http
               .get('api/panier/totaleprixpanier/' + id)
@@ -91,6 +91,7 @@ export class CheckoutComponent implements OnInit {
     }
 
     this.invokeStripe();
+   
   }
 
   PlaceOrder() {

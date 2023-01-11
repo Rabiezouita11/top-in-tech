@@ -46,6 +46,19 @@ export class ComponentClientComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.SocketIOServiceService.listen('produithorsStock').subscribe(
+      (data: any) => {
+        this.toastr.error('Le produit ' + data.xx.nom + ' est hors stock', 'Error', {
+          timeOut: 7000,
+          progressBar: true,
+          progressAnimation: 'increasing',
+          positionClass: 'toast-top-right',
+        });
+
+      
+        console.log(data);
+      }
+    );
     this.http.get('api/auth/getUser', { withCredentials: true }).subscribe(
       (res: any) => {
         let str = 'http://localhost:4200/' + 'api' + '/' + res.image;
