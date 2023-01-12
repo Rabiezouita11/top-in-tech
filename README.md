@@ -3,6 +3,11 @@ Ecommerce web application using Angular 13  | Node.js | Express.js | sequelize
 
 ## Steps for Project Execution :
 
+configuration email (Server : backend) : 
+ auth: {
+      user: "", // generated ethereal user
+      pass: "",
+    } in file : controllers/auth/forgetPassword.js , controllers/BienvenueEmail/email.js , controllers/emaildeletePanier/email.js , controllers/emaildeletePanier/emaildeletecoupoun.js , 
 ##### Client Install
 ```
 cd ecommerce-fronted
@@ -93,6 +98,11 @@ https://user-images.githubusercontent.com/91283165/212133882-61783ef3-319b-4cab-
 ##### Signaler Avis 
 utiliser Socket io 
 https://user-images.githubusercontent.com/91283165/212134234-a368ab47-b693-4b0f-85c2-2d69b2cc79e9.mp4
+##### like unlike / noter Prdouit 
+https://user-images.githubusercontent.com/91283165/212136156-877e5573-ac11-48bf-8e1e-d9b8e4b93fa6.mp4
+
+##### checkout 
+https://user-images.githubusercontent.com/91283165/212136217-89000be7-8403-4e9e-a595-00b7800007a1.mp4
 
 
 
