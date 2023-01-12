@@ -32,7 +32,7 @@
             <!-- brand filter start -->
             <div class="collection-mobile-back"><span class="filter-back"><i class="fa fa-angle-left"
                                                                              aria-hidden="true"></i> back</span></div>
-            <div class="collection-collapse-block open">
+            <!-- <div class="collection-collapse-block open">
               <h3 class="collapse-block-title">brand</h3>
               <div class="collection-collapse-block-content">
                 <div class="collection-brand-filter">
@@ -58,9 +58,9 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- color filter start here -->
-            <div class="collection-collapse-block open">
+            <!-- <div class="collection-collapse-block open">
               <h3 class="collapse-block-title">colors</h3>
               <div class="collection-collapse-block-content">
                 <div class="color-selector">
@@ -75,9 +75,9 @@
                   </ul>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- size filter start here -->
-            <div class="collection-collapse-block border-0 open">
+            <!-- <div class="collection-collapse-block border-0 open">
               <h3 class="collapse-block-title">size</h3>
               <div class="collection-collapse-block-content">
                 <div class="collection-brand-filter">
@@ -99,14 +99,15 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- price filter start here -->
             <div class="collection-collapse-block border-0 open">
               <h3 class="collapse-block-title">price</h3>
               <div class="collection-collapse-block-content">
                 <div class="wrapper mt-3">
                   <div class="range-slider">
-                    <input type="text" class="js-range-slider" value="" />
+                    <input class="mdc-slider__input" type="range" min="0" max="100" value="50" [(ngModel)]="inputPrice" name="volume" step="10" aria-label="Discrete slider demo">
+                    {{inputPrice}}
                   </div>
                 </div>
               </div>
@@ -278,7 +279,7 @@
                   <div class="product-wrapper-grid">
                     <div class="row margin-res">
                       <div class="col-xl-3 col-6 col-grid-box" *ngFor="let item of listcatProduit">
-                        <div class="product-box">
+                        <div class="product-box" *ngIf="inputPrice >= item.prix || inputPrice == null">
                           <div class="img-wrapper">
                             <div class="front">
                               <a [routerLink]="['/singleProduct/',item.id ]"><img src="/api/{{item.image}}"

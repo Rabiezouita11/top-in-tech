@@ -22,6 +22,7 @@
     "@angular/router": "~13.3.0",
     "@googlemaps/js-api-loader": "^1.15.1",
     "@material/radio": "^14.0.0",
+    "@material/slider": "^14.0.0",
     "@tailwindcss/postcss7-compat": "^2.2.17",
     "@types/socket.io": "^3.0.2",
     "@types/socket.io-client": "^3.0.0",

@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { ScriptService } from './../../Service/script/script.service';
 import { ToastrService } from 'ngx-toastr';
@@ -18,6 +18,7 @@ const SCRIPT_PATH_LIST = [
   styleUrls: ['./single-categorie.component.css'],
 })
 export class SingleCategorieComponent implements OnInit {
+  inputPrice !:any;
   listcatProduit: any;
   catnom: any;
   catimage: any;
@@ -185,6 +186,11 @@ export class SingleCategorieComponent implements OnInit {
 
         }
       );
+}
+
+
+getValue(event: any) {
+console.log(event.target.value) ;
 }
 
 }

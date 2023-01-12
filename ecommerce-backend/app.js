@@ -104,7 +104,6 @@ const myDailyTask = async () => {
   users.forEach(async (user) => {
     var someDate = new Date();
     someDate.setDate(someDate.getDate());
-
     var dateFormated = someDate.toISOString().substr(0, 10);
     if (user.date_supprimer_compte == dateFormated) {
       await db.user.destroy({
@@ -489,3 +488,6 @@ io.on("connection", (socket) => {
   });
   // how recupere user if ban or not
 });
+
+
+ 
