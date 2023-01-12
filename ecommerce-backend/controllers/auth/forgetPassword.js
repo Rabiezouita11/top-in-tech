@@ -50,8 +50,8 @@ async function sendMail(email , link, nom) {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: "rabie.zouita@esprit.tn", // generated ethereal user
-      pass: "ba9arwechi13633840",
+      user: "", // generated ethereal user
+      pass: "",
     }
   });
 
