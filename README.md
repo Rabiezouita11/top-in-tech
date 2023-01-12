@@ -43,3 +43,10 @@ Ecommerce web application using Angular 13  | Node.js | Express.js | sequelize
 
 ## Screenshots
 
+##### HomePage
+
+
+https://user-images.githubusercontent.com/91283165/212124797-212e6c73-40a0-4261-b615-c370716ee93c.mp4
+
+
+
