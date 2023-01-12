@@ -2,13 +2,13 @@
 Ecommerce web application using Angular 13  | Node.js | Express.js | sequelize    
 
 ## Steps for Project Execution :
-```
+
 configuration email (Server : backend) : 
  auth: {
       user: "", // generated ethereal user
       pass: "",
     } in file : controllers/auth/forgetPassword.js , controllers/BienvenueEmail/email.js , controllers/emaildeletePanier/email.js , controllers/emaildeletePanier/emaildeletecoupoun.js 
-    ```
+   
 ##### Client Install
 ```
 cd ecommerce-fronted
