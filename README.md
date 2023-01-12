@@ -5,15 +5,15 @@ Ecommerce web application using Angular 13  | Node.js | Express.js | sequelize
 
 ##### Client Install
 ```
-cd client/Angularecommerce
-npm install
-ng serve -o
+cd ecommerce-fronted
+npm install --force
+ng serve 
 ```
 ##### Server Install
 ```
-cd server
-npm install
-node server.js
+cd ecommerce-backend
+npm install 
+npm run dev 
 ```
 
 
@@ -75,6 +75,16 @@ https://user-images.githubusercontent.com/91283165/212127159-f89194af-a8ee-48c7-
 ##### PanierCommande 
 https://user-images.githubusercontent.com/91283165/212128462-c2931f28-fb0a-41d4-89ec-457f8249568a.mp4
 ##### mot de passe oublier 
+https://user-images.githubusercontent.com/91283165/212131514-9ca0c098-a7ed-4bb7-ae03-67c398995b9f.mp4
+
+##### Dashboard Administrateur
+
+Statistiques (nbr des utilisateurs actifs )
+liste des clients qui achètent , sa position indiquée sur la map.
+https://user-images.githubusercontent.com/91283165/212132461-0ee018f2-3664-4066-b888-6e6159f84da4.mp4
+
+
+
 
 
 
