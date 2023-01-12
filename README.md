@@ -1,6 +1,21 @@
 # Ecommerce
 Ecommerce web application using Angular 13  | Node.js | Express.js | sequelize    
 
+## Steps for Project Execution :
+
+##### Client Install
+```
+cd client/Angularecommerce
+npm install
+ng serve -o
+```
+##### Server Install
+```
+cd server
+npm install
+node server.js
+```
+
 
 <table>
 <thead>
@@ -59,6 +74,8 @@ https://user-images.githubusercontent.com/91283165/212126896-b019252b-ea8c-4662-
 https://user-images.githubusercontent.com/91283165/212127159-f89194af-a8ee-48c7-98d4-089edb5dcf74.mp4
 ##### PanierCommande 
 https://user-images.githubusercontent.com/91283165/212128462-c2931f28-fb0a-41d4-89ec-457f8249568a.mp4
+##### mot de passe oublier 
+
 
 
 
