@@ -5,7 +5,7 @@ Ecommerce web application using Angular 13  | Node.js | Express.js | sequelize
 
 configuration email (Server : backend) : 
  auth: {
-      user: "", // generated ethereal user
+      user: "", 
       pass: "",
     } in file : controllers/auth/forgetPassword.js , controllers/BienvenueEmail/email.js , controllers/emaildeletePanier/email.js , controllers/emaildeletePanier/emaildeletecoupoun.js 
    
