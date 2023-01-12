@@ -81,7 +81,27 @@ https://user-images.githubusercontent.com/91283165/212131514-9ca0c098-a7ed-4bb7-
 
 Statistiques (nbr des utilisateurs actifs )
 liste des clients qui achètent , sa position indiquée sur la map.
-https://user-images.githubusercontent.com/91283165/212132461-0ee018f2-3664-4066-b888-6e6159f84da4.mp4
+https://user-images.githubusercontent.com/91283165/212132640-b65911ee-1751-46cb-b554-119eb743fe24.mp4
+
+
+##### banier client 
+https://user-images.githubusercontent.com/91283165/212133287-b989d180-86c4-4c55-9040-05c3135f5182.mp4
+
+##### Ajouter Promotion
+https://user-images.githubusercontent.com/91283165/212133882-61783ef3-319b-4cab-ac11-d1b14e038a04.mp4
+
+##### Signaler Avis 
+utiliser Socket io 
+https://user-images.githubusercontent.com/91283165/212134234-a368ab47-b693-4b0f-85c2-2d69b2cc79e9.mp4
+
+
+
+
+
+
+
+
+
 
 
 
