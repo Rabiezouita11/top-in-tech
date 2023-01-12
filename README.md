@@ -40,3 +40,6 @@ Ecommerce web application using Angular 13  | Node.js | Express.js | sequelize
 	</tr>
 </tbody>
 </table>
+
+## Screenshots
+
