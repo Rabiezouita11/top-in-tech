@@ -21,7 +21,11 @@ cd ecommerce-backend
 npm install 
 npm run dev 
 ```
-
+##### role 
+```
+Client : user ,
+Admin : admin
+```
 
 <table>
 <thead>
